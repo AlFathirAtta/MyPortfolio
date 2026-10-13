@@ -25,8 +25,8 @@ export default function Hero() {
         minHeight: "100vh",
         display: "flex",
         flexDirection: "column",
-        justifyContent: "flex-end",
-        padding: "0 0 5rem 0",
+        justifyContent: "center",
+        padding: "7rem 0 5rem 0",
         position: "relative",
         background: "var(--bg-main)",
         overflow: "hidden",
@@ -37,17 +37,17 @@ export default function Hero() {
         aria-hidden="true"
         style={{
           position: "absolute",
-          top: "-10%",
-          right: "-5%",
-          width: "600px",
-          height: "600px",
+          top: "5%",
+          right: "0%",
+          width: "700px",
+          height: "700px",
           borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(56,189,248,0.07) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(56,189,248,0.1) 0%, rgba(56,189,248,0.02) 50%, transparent 70%)",
           pointerEvents: "none",
         }}
       />
 
-      {/* Large background number */}
+      {/* Large background watermark */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -55,11 +55,10 @@ export default function Hero() {
         aria-hidden="true"
         style={{
           position: "absolute",
-          top: "50%",
-          right: "-2%",
-          transform: "translateY(-60%)",
+          bottom: "2%",
+          right: "2%",
           fontFamily: "var(--font-display)",
-          fontSize: "clamp(12rem, 28vw, 26rem)",
+          fontSize: "clamp(10rem, 24vw, 22rem)",
           fontWeight: 900,
           fontStyle: "italic",
           color: "rgba(56,189,248,0.025)",
@@ -73,191 +72,310 @@ export default function Hero() {
       </motion.div>
 
       <div className="container" style={{ width: "100%", position: "relative", zIndex: 1 }}>
-        {/* Top row: status + photo */}
         <div
           className="hero-grid"
           style={{
             display: "grid",
-            gridTemplateColumns: "1fr auto",
-            alignItems: "flex-end",
-            gap: "3rem",
-            marginBottom: "3rem",
+            gridTemplateColumns: "1.15fr 0.85fr",
+            alignItems: "center",
+            gap: "3.5rem",
           }}
         >
-          {/* Status */}
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <span className="status-pill">
-              <span className="status-dot" />
-              Terbuka untuk Magang &amp; Proyek Web
-            </span>
-          </motion.div>
+          {/* Left Column: Headline, Bio & CTAs */}
+          <div>
+            {/* Status Pill */}
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              style={{ marginBottom: "1.5rem" }}
+            >
+              <span className="status-pill">
+                <span className="status-dot" />
+                Terbuka untuk Magang &amp; Proyek Web
+              </span>
+            </motion.div>
 
-          {/* Photo */}
+            {/* Name Headline */}
+            <motion.div
+              initial={{ opacity: 0, y: 25 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <h1
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontWeight: 900,
+                  fontStyle: "italic",
+                  fontSize: "clamp(2.75rem, 6.2vw, 5.6rem)",
+                  lineHeight: 1.0,
+                  letterSpacing: "-0.03em",
+                  color: "var(--cream)",
+                  marginBottom: "1.25rem",
+                }}
+              >
+                Muhammad Al Fathir<br />
+                <span style={{ color: "var(--accent)" }}>Attaullah</span>
+              </h1>
+            </motion.div>
+
+            {/* Role & Description */}
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55, delay: 0.25 }}
+            >
+              <div
+                style={{
+                  fontFamily: "var(--font-mono)",
+                  fontSize: "11px",
+                  letterSpacing: "0.12em",
+                  color: "var(--accent)",
+                  textTransform: "uppercase",
+                  marginBottom: "0.85rem",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "0.5rem",
+                }}
+              >
+                <span>Front End Developer</span>
+                <span style={{ color: "var(--border-medium)" }}>·</span>
+                <span>SMK Telkom Malang</span>
+              </div>
+
+              <p
+                style={{
+                  color: "var(--text-secondary)",
+                  fontSize: "clamp(0.95rem, 1.8vw, 1.05rem)",
+                  lineHeight: 1.8,
+                  fontWeight: 300,
+                  maxWidth: "540px",
+                  marginBottom: "2rem",
+                }}
+              >
+                Fokus merancang antarmuka web yang bersih, responsif, dan mudah digunakan.
+                Memadukan kode front-end rapi dengan pengalaman kepemimpinan organisasi nyata.
+              </p>
+
+              {/* CTAs & Socials */}
+              <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "1.25rem" }}>
+                <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
+                  <a
+                    href="#projects"
+                    id="hero-cta-projects"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
+                    }}
+                    className="btn btn-primary"
+                  >
+                    <span>Lihat Proyek</span>
+                    <ArrowRight size={14} />
+                  </a>
+
+                  <a
+                    href="#contact"
+                    id="hero-cta-contact"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+                    }}
+                    className="btn btn-secondary"
+                  >
+                    Hubungi Saya
+                  </a>
+                </div>
+
+                {/* Social Icons */}
+                <div style={{ display: "flex", alignItems: "center", gap: "0.45rem" }}>
+                  {[
+                    { href: "https://github.com/AlFathirAtta", label: "GitHub", icon: <GithubIcon size={16} /> },
+                    { href: "https://www.linkedin.com/in/al-fathir-attaullah-48891040b/", label: "LinkedIn", icon: <LinkedinIcon size={16} /> },
+                    { href: "mailto:muhammadattaullahh@gmail.com", label: "Email", icon: <Mail size={16} /> },
+                  ].map((s) => (
+                    <a
+                      key={s.label}
+                      href={s.href}
+                      target={s.href.startsWith("http") ? "_blank" : undefined}
+                      rel="noopener noreferrer"
+                      aria-label={s.label}
+                      style={{
+                        width: "36px",
+                        height: "36px",
+                        borderRadius: "var(--radius-sm)",
+                        border: "1px solid var(--border-subtle)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        color: "var(--text-secondary)",
+                        transition: "all 0.15s ease",
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.color = "var(--cream)";
+                        e.currentTarget.style.borderColor = "var(--border-medium)";
+                        e.currentTarget.style.background = "rgba(56, 189, 248, 0.08)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.color = "var(--text-secondary)";
+                        e.currentTarget.style.borderColor = "var(--border-subtle)";
+                        e.currentTarget.style.background = "transparent";
+                      }}
+                    >
+                      {s.icon}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Right Column: Prominent Portrait Frame */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.15 }}
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             style={{
-              width: "clamp(80px, 12vw, 130px)",
-              aspectRatio: "1/1",
-              borderRadius: "50%",
-              overflow: "hidden",
-              border: "2px solid var(--border-subtle)",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
               position: "relative",
-              flexShrink: 0,
             }}
           >
-            <Image
-              src={profilePic}
-              alt="Muhammad Al Fathir Attaullah"
-              fill
-              style={{ objectFit: "cover", objectPosition: "center top" }}
-              sizes="130px"
-              priority
+            {/* Soft cyan radial glow behind card */}
+            <div
+              aria-hidden="true"
+              style={{
+                position: "absolute",
+                inset: "-20px",
+                borderRadius: "28px",
+                background: "radial-gradient(circle, rgba(56,189,248,0.2) 0%, rgba(56,189,248,0.04) 50%, transparent 70%)",
+                filter: "blur(30px)",
+                pointerEvents: "none",
+              }}
             />
-          </motion.div>
-        </div>
 
-        {/* Big Name */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <h1
-            style={{
-              fontFamily: "var(--font-display)",
-              fontWeight: 900,
-              fontStyle: "italic",
-              fontSize: "clamp(3rem, 8.5vw, 7.5rem)",
-              lineHeight: 0.95,
-              letterSpacing: "-0.03em",
-              color: "var(--cream)",
-              marginBottom: "1rem",
-            }}
-          >
-            Muhammad Al Fathir<br />
-            <span style={{ color: "var(--accent)" }}>Attaullah</span>
-          </h1>
-        </motion.div>
-
-        {/* Bottom row: role + description + CTAs */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.55, delay: 0.3 }}
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            alignItems: "flex-start",
-            justifyContent: "space-between",
-            gap: "2rem",
-            marginTop: "1.5rem",
-            paddingTop: "1.5rem",
-            borderTop: "1px solid var(--border-faint)",
-          }}
-        >
-          {/* Left: role + desc */}
-          <div style={{ maxWidth: "520px" }}>
+            {/* Portrait Card */}
             <div
               style={{
-                fontFamily: "var(--font-mono)",
-                fontSize: "11px",
-                letterSpacing: "0.1em",
-                color: "var(--accent)",
-                textTransform: "uppercase",
-                marginBottom: "0.75rem",
+                position: "relative",
+                width: "100%",
+                maxWidth: "370px",
+                aspectRatio: "3 / 4.2",
+                borderRadius: "20px",
+                overflow: "hidden",
+                border: "1px solid var(--border-medium)",
+                background: "var(--bg-surface)",
+                boxShadow: "0 25px 60px rgba(0, 0, 0, 0.75), 0 0 50px rgba(56, 189, 248, 0.15)",
               }}
             >
-              Front End Developer · Siswa RPL SMK Telkom Malang
-            </div>
-            <p
-              style={{
-                color: "var(--text-secondary)",
-                fontSize: "0.95rem",
-                lineHeight: 1.75,
-                fontWeight: 300,
-              }}
-            >
-              Fokus merancang antarmuka web yang bersih, responsif, dan mudah digunakan.
-              Memadukan kode front-end rapi dengan pengalaman kepemimpinan organisasi nyata.
-            </p>
-          </div>
-
-          {/* Right: CTAs + socials */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "1rem", alignItems: "flex-end" }}>
-            <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap", justifyContent: "flex-end" }}>
-              <a
-                href="#projects"
-                id="hero-cta-projects"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
+              {/* Top Technical Metadata Bar */}
+              <div
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  zIndex: 10,
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  padding: "12px 18px",
+                  background: "linear-gradient(180deg, rgba(5,8,15,0.88) 0%, rgba(5,8,15,0) 100%)",
+                  fontFamily: "var(--font-mono)",
+                  fontSize: "10px",
+                  letterSpacing: "0.08em",
+                  color: "var(--text-secondary)",
                 }}
-                className="btn btn-primary"
               >
-                <span>Lihat Proyek</span>
-                <ArrowRight size={14} />
-              </a>
+                <span style={{ color: "var(--accent)", fontWeight: 500 }}>PORTRAIT // ATTA</span>
+                <span>SMK TELKOM MLG</span>
+              </div>
 
-              <a
-                href="#contact"
-                id="hero-cta-contact"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+              {/* High quality portrait image */}
+              <Image
+                src={profilePic}
+                alt="Muhammad Al Fathir Attaullah"
+                fill
+                style={{
+                  objectFit: "cover",
+                  objectPosition: "center 18%",
                 }}
-                className="btn btn-secondary"
-              >
-                Hubungi Saya
-              </a>
-            </div>
+                sizes="(max-width: 768px) 340px, 420px"
+                priority
+              />
 
-            {/* Social icons */}
-            <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-              {[
-                { href: "https://github.com/AlFathirAtta", label: "GitHub", icon: <GithubIcon size={16} /> },
-                { href: "https://www.linkedin.com/in/al-fathir-attaullah-48891040b/", label: "LinkedIn", icon: <LinkedinIcon size={16} /> },
-                { href: "mailto:muhammadattaullahh@gmail.com", label: "Email", icon: <Mail size={16} /> },
-              ].map((s) => (
-                <a
-                  key={s.label}
-                  href={s.href}
-                  target={s.href.startsWith("http") ? "_blank" : undefined}
-                  rel="noopener noreferrer"
-                  aria-label={s.label}
+              {/* Bottom gradient overlay for contrast */}
+              <div
+                aria-hidden="true"
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  background: "linear-gradient(to top, rgba(5,8,15,0.92) 0%, rgba(5,8,15,0.3) 30%, transparent 60%)",
+                  pointerEvents: "none",
+                }}
+              />
+
+              {/* Bottom Floating Info Glass Card */}
+              <div
+                style={{
+                  position: "absolute",
+                  bottom: "16px",
+                  left: "16px",
+                  right: "16px",
+                  zIndex: 10,
+                  padding: "14px 16px",
+                  borderRadius: "14px",
+                  background: "rgba(8, 13, 24, 0.85)",
+                  border: "1px solid var(--border-subtle)",
+                  backdropFilter: "blur(16px)",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "4px",
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                  <span
+                    style={{
+                      fontFamily: "var(--font-body)",
+                      fontWeight: 600,
+                      fontSize: "0.95rem",
+                      color: "var(--cream)",
+                    }}
+                  >
+                    M. Al Fathir Attaullah
+                  </span>
+                  <span
+                    style={{
+                      fontFamily: "var(--font-mono)",
+                      fontSize: "9.5px",
+                      color: "var(--accent)",
+                      padding: "2px 7px",
+                      borderRadius: "var(--radius-full)",
+                      background: "rgba(56, 189, 248, 0.12)",
+                      border: "1px solid rgba(56, 189, 248, 0.25)",
+                    }}
+                  >
+                    RPL XII
+                  </span>
+                </div>
+                <div
                   style={{
-                    width: "34px",
-                    height: "34px",
-                    borderRadius: "var(--radius-sm)",
-                    border: "1px solid var(--border-subtle)",
+                    fontFamily: "var(--font-mono)",
+                    fontSize: "10.5px",
+                    color: "var(--text-secondary)",
                     display: "flex",
                     alignItems: "center",
-                    justifyContent: "center",
-                    color: "var(--text-secondary)",
-                    transition: "all 0.15s ease",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.color = "var(--cream)";
-                    e.currentTarget.style.borderColor = "var(--border-medium)";
-                    e.currentTarget.style.background = "rgba(240,235,225,0.05)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.color = "var(--text-secondary)";
-                    e.currentTarget.style.borderColor = "var(--border-subtle)";
-                    e.currentTarget.style.background = "transparent";
+                    gap: "6px",
                   }}
                 >
-                  {s.icon}
-                </a>
-              ))}
+                  <span>Front End Dev</span>
+                  <span style={{ color: "var(--accent)" }}>·</span>
+                  <span>Koordinator Sie 5 OSIS</span>
+                </div>
+              </div>
             </div>
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

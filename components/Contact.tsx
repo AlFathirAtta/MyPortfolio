@@ -36,7 +36,7 @@ const inputStyle: React.CSSProperties = {
   width: "100%",
   padding: "0.8rem 1rem",
   borderRadius: "var(--radius-sm)",
-  background: "rgba(240,235,225,0.04)",
+  background: "rgba(239, 246, 255, 0.03)",
   border: "1px solid var(--border-subtle)",
   color: "var(--text-primary)",
   fontFamily: "var(--font-body)",
@@ -213,7 +213,7 @@ export default function Contact() {
                     color: "inherit",
                     transition: "background 0.15s ease",
                   }}
-                  onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(240,235,225,0.03)"; }}
+                  onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(56, 189, 248, 0.05)"; }}
                   onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; }}
                 >
                   <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>

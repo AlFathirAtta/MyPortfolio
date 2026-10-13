@@ -61,7 +61,7 @@ function SituPreview() {
       style={{
         position: "relative",
         aspectRatio: "16/9",
-        background: "#0A0A0A",
+        background: "var(--bg-void)",
         overflow: "hidden",
         display: "flex",
         flexDirection: "column",
@@ -153,7 +153,7 @@ function ImageCarousel({ images, title }: { images: string[]; title: string }) {
             position: "relative",
             aspectRatio: "16/9",
             cursor: "zoom-in",
-            background: "#080808",
+            background: "var(--bg-void)",
           }}
           onClick={() => setLightbox(true)}
           role="button"

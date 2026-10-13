@@ -81,7 +81,7 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
               transform: "translateX(-50%)",
               width: "600px",
               height: "400px",
-              background: "radial-gradient(ellipse, rgba(232,99,10,0.06) 0%, transparent 70%)",
+              background: "radial-gradient(ellipse, rgba(56,189,248,0.1) 0%, transparent 70%)",
               pointerEvents: "none",
             }}
           />

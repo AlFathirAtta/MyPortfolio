@@ -242,7 +242,7 @@ img { max-width: 100%; height: auto; }
 
 .btn:active { transform: scale(0.97); }
 
-/* Primary: Filled Orange */
+/* Primary: Filled Light Blue */
 .btn-primary {
   background: var(--accent);
   color: #050D18;
@@ -348,7 +348,7 @@ img { max-width: 100%; height: auto; }
 }
 
 .navbar.scrolled {
-  background: rgba(8, 8, 8, 0.92);
+  background: rgba(8, 13, 24, 0.92);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom-color: var(--border-faint);
