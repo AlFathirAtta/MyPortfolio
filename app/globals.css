@@ -1,26 +1,320 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
 @import "tailwindcss";
 
+/* ============================================
+   DESIGN TOKENS — Regal Midnight Sapphire (Elegan Premium)
+   ============================================ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Dominant Regal Midnight Navy Backgrounds */
+  --bg-main:       #060C18; /* Deep Oceanic Midnight Navy */
+  --bg-surface:    #0C1629; /* Velvet Deep Sapphire Slate */
+  --bg-card:       #111E36; /* Elevated Sapphire Card */
+  --bg-card-hover: #162644; /* Interactive Hover Surface */
+  --bg-glass:      rgba(8, 16, 32, 0.88);
+
+  /* Precise Luxury Hairline Borders */
+  --border-subtle: rgba(96, 165, 250, 0.12); /* Delicate Sapphire Border */
+  --border-medium: rgba(96, 165, 250, 0.24);
+  --border-focus:  rgba(59, 130, 246, 0.6);
+
+  /* Typography Colors */
+  --text-primary:  #F8FAFC; /* Crisp Ice Slate White */
+  --text-secondary:#94A3B8; /* Refined Slate Gray */
+  --text-muted:    #64748B; /* Subtle Cool Slate */
+
+  /* Curated Premium Blue Accents (Dominant Blue) */
+  --accent-blue:       #2563EB; /* Regal Royal Blue (Solid CTA) */
+  --accent-blue-deep:  #1D4ED8; /* Deep Royal Navy */
+  --accent-blue-light: #60A5FA; /* Ice Sapphire Highlight */
+  --accent-blue-soft:  rgba(59, 130, 246, 0.12);
+
+  /* Complementary Refined Accents */
+  --accent-gold:   #D4AF37; /* Champagne / Antique Gold for Honors */
+  --accent-emerald:#10B981; /* Precision Emerald Status Dot */
+
+  /* Backwards Compatibility Mapping */
+  --paper:         var(--bg-main);
+  --paper-alt:     var(--bg-surface);
+  --grid-line:     var(--border-subtle);
+  --ink:           var(--text-primary);
+  --ink-muted:     var(--text-secondary);
+  --ink-subtle:    var(--text-muted);
+  --blue-primary:  var(--accent-blue-light);
+  --blue-bright:   #93C5FD;
+  --amber-seal:    var(--accent-gold);
+
+  /* Elevation Shadows */
+  --shadow-sm:     0 2px 10px rgba(2, 6, 16, 0.5);
+  --shadow-md:     0 12px 35px rgba(2, 6, 16, 0.7);
+
+  /* Fonts */
+  --font-heading: 'Space Grotesk', -apple-system, sans-serif;
+  --font-body:    'IBM Plex Sans', -apple-system, sans-serif;
+  --font-mono:    'IBM Plex Mono', monospace;
+
+  /* Spacing */
+  --section-padding:   6.5rem 0;
+  --container-max:     1160px;
+  --container-padding: 1.5rem;
+
+  /* Border / Radius */
+  --radius-sm: 4px;
+  --radius:    8px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --transition-fast:   0.15s ease;
+  --transition-normal: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ============================================
+   RESET & BASE
+   ============================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+  background-color: var(--bg-main);
+  color-scheme: dark;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body);
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  font-size: 16px;
+  line-height: 1.625;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+::selection {
+  background-color: rgba(37, 99, 235, 0.35);
+  color: #FFFFFF;
+}
+
+/* ============================================
+   SCROLLBAR
+   ============================================ */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-main); }
+::-webkit-scrollbar-thumb { background: rgba(96, 165, 250, 0.2); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent-blue-light); }
+
+/* ============================================
+   LAYOUT UTILITIES
+   ============================================ */
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+.section-padding {
+  padding: var(--section-padding);
+}
+
+/* ============================================
+   TYPOGRAPHY UTILITIES
+   ============================================ */
+.mono {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.02em;
+}
+
+.section-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.85rem, 3.5vw, 2.5rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.6rem;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+}
+
+.section-subtitle {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  max-width: 62ch;
+}
+
+.section-header {
+  margin-bottom: 2.75rem;
+  padding-left: 1.1rem;
+  border-left: 3px solid var(--accent-blue);
+}
+
+/* ============================================
+   CARDS & SURFACES
+   ============================================ */
+.bp-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  transition:
+    border-color var(--transition-fast),
+    box-shadow   var(--transition-normal),
+    background-color var(--transition-fast);
+  position: relative;
+}
+
+.bp-card:hover {
+  border-color: var(--border-medium);
+  background: var(--bg-card);
+  box-shadow: var(--shadow-md);
+}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.25rem;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: var(--radius);
+  cursor: pointer;
+  border: 1px solid transparent;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-primary {
+  background: var(--accent-blue);
+  color: #FFFFFF;
+  border-color: #3B82F6;
+  box-shadow: 0 2px 12px rgba(37, 99, 235, 0.3);
+}
+
+.btn-primary:hover {
+  background: #1D4ED8;
+  border-color: #60A5FA;
+  box-shadow: 0 4px 18px rgba(37, 99, 235, 0.45);
+}
+
+.btn-secondary {
+  background: rgba(14, 28, 52, 0.6);
+  color: var(--text-primary);
+  border: 1px solid var(--border-medium);
+}
+
+.btn-secondary:hover {
+  background: rgba(37, 99, 235, 0.15);
+  border-color: var(--accent-blue-light);
+  color: #FFFFFF;
+}
+
+.btn-ghost {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-primary);
+  border-color: var(--border-subtle);
+}
+
+.btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--border-medium);
+  color: #FFFFFF;
+}
+
+/* ============================================
+   TAGS & BADGES
+   ============================================ */
+.mono-tag {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  padding: 0.25rem 0.6rem;
+  border: 1px solid rgba(96, 165, 250, 0.18);
+  background: rgba(12, 24, 46, 0.6);
+  color: #93C5FD;
+  border-radius: var(--radius-sm);
+  letter-spacing: 0.02em;
+  transition: all var(--transition-fast);
+}
+
+.mono-tag:hover {
+  border-color: var(--accent-blue-light);
+  color: #FFFFFF;
+  background: rgba(37, 99, 235, 0.2);
+}
+
+/* Status Pill */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: var(--radius-full);
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: #34D399;
+  letter-spacing: 0.02em;
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #10B981;
+}
+
+/* ============================
+   NAVBAR
+   ============================ */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(6, 12, 24, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border-subtle);
+  transition: all var(--transition-normal);
+}
+
+.navbar.scrolled {
+  background: rgba(6, 12, 24, 0.96);
+  box-shadow: 0 4px 24px rgba(2, 6, 16, 0.6);
+  border-bottom-color: var(--border-medium);
 }
