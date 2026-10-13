@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { Mail, Phone, MapPin, Send, MessageCircle, Download, CheckCircle, Copy, Check, ExternalLink } from "lucide-react";
 import Image from "next/image";
-import profilePic from "@/public/profile.jpg";
+import profilePic from "@/public/Profle.jpg";
 import BlueprintSheet from "@/components/ui/BlueprintSheet";
 
 const GithubIcon = ({ size = 18 }: { size?: number }) => (

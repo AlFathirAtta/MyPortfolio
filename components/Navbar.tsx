@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { AnimatePresence, motion, useScroll, useSpring } from "framer-motion";
 import { Menu, X, Download } from "lucide-react";
 import Image from "next/image";
-import profilePic from "@/public/profile.jpg";
+import profilePic from "@/public/Profle.jpg";
 
 const navLinks = [
   { href: "#about",        label: "Tentang" },

@@ -2,7 +2,7 @@
 
 import { ArrowRight, Mail } from "lucide-react";
 import Image from "next/image";
-import profilePic from "@/public/profile.jpg";
+import profilePic from "@/public/Profle.jpg";
 import { motion } from "framer-motion";
 
 const GithubIcon = ({ size = 18 }: { size?: number }) => (
