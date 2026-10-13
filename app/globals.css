@@ -2,45 +2,45 @@
 @import "tailwindcss";
 
 /* ============================================
-   DESIGN TOKENS — Warm Dark Editorial
+   DESIGN TOKENS — Cool Sky Blue Dark
    ============================================ */
 :root {
-  /* Backgrounds */
-  --bg-void:    #080808;
-  --bg-main:    #0D0D0D;
-  --bg-surface: #141414;
-  --bg-raised:  #1A1A1A;
-  --bg-card:    #1F1F1F;
+  /* Backgrounds — deep navy/slate dark */
+  --bg-void:    #05080F;
+  --bg-main:    #080D18;
+  --bg-surface: #0C1220;
+  --bg-raised:  #101828;
+  --bg-card:    #141F30;
 
-  /* Core Palette */
-  --cream:      #F0EBE1;
-  --cream-dim:  #B8B0A4;
-  --cream-muted:#6B6560;
+  /* Core Text Palette */
+  --cream:      #EFF6FF;   /* Almost-white with cool blue tint */
+  --cream-dim:  #A8C4E0;
+  --cream-muted:#5C7B99;
 
-  /* Accent — Burnt Orange */
-  --accent:       #E8630A;
-  --accent-warm:  #F0780F;
-  --accent-muted: rgba(232, 99, 10, 0.15);
-  --accent-glow:  rgba(232, 99, 10, 0.25);
+  /* Accent — Electric Light Blue */
+  --accent:       #38BDF8;  /* sky-400 — vivid cool blue */
+  --accent-warm:  #7DD3FC;  /* sky-300 — lighter on hover */
+  --accent-muted: rgba(56, 189, 248, 0.12);
+  --accent-glow:  rgba(56, 189, 248, 0.22);
 
-  /* Secondary accent — Dusty Amber */
-  --amber:      #C9973B;
-  --amber-dim:  rgba(201, 151, 59, 0.2);
+  /* Secondary accent — Indigo/Violet tint */
+  --amber:      #818CF8;   /* indigo-400 — used for highlights */
+  --amber-dim:  rgba(129, 140, 248, 0.18);
 
   /* Borders */
-  --border-faint:  rgba(240, 235, 225, 0.06);
-  --border-subtle: rgba(240, 235, 225, 0.1);
-  --border-medium: rgba(240, 235, 225, 0.18);
+  --border-faint:  rgba(56, 189, 248, 0.07);
+  --border-subtle: rgba(56, 189, 248, 0.14);
+  --border-medium: rgba(56, 189, 248, 0.25);
 
   /* Text */
-  --text-primary:   #F0EBE1;
-  --text-secondary: #9E9690;
-  --text-muted:     #5C5650;
+  --text-primary:   #EFF6FF;
+  --text-secondary: #7BA3C0;
+  --text-muted:     #3D5A73;
 
   /* Shadows */
-  --shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.5);
-  --shadow-md: 0 8px 40px rgba(0, 0, 0, 0.7);
-  --shadow-glow: 0 0 40px rgba(232, 99, 10, 0.15);
+  --shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.6);
+  --shadow-md: 0 8px 40px rgba(0, 0, 0, 0.75);
+  --shadow-glow: 0 0 50px rgba(56, 189, 248, 0.12);
 
   /* Fonts */
   --font-display: 'Playfair Display', Georgia, serif;
@@ -106,8 +106,8 @@ a {
 img { max-width: 100%; height: auto; }
 
 ::selection {
-  background-color: rgba(232, 99, 10, 0.35);
-  color: var(--cream);
+  background-color: rgba(56, 189, 248, 0.3);
+  color: #ffffff;
 }
 
 /* ============================================
@@ -115,7 +115,7 @@ img { max-width: 100%; height: auto; }
    ============================================ */
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: var(--bg-void); }
-::-webkit-scrollbar-thumb { background: #2A2A2A; border-radius: 3px; }
+::-webkit-scrollbar-thumb { background: rgba(56, 189, 248, 0.15); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 
 /* ============================================
@@ -245,14 +245,15 @@ img { max-width: 100%; height: auto; }
 /* Primary: Filled Orange */
 .btn-primary {
   background: var(--accent);
-  color: #FFFFFF;
+  color: #050D18;
   border-color: var(--accent);
+  font-weight: 600;
 }
 
 .btn-primary:hover {
   background: var(--accent-warm);
   border-color: var(--accent-warm);
-  box-shadow: 0 4px 20px rgba(232, 99, 10, 0.4);
+  box-shadow: 0 4px 24px rgba(56, 189, 248, 0.35);
 }
 
 /* Secondary: Outlined Cream */
@@ -309,8 +310,8 @@ img { max-width: 100%; height: auto; }
   gap: 0.45rem;
   padding: 0.3rem 0.8rem;
   border-radius: var(--radius-full);
-  background: rgba(232, 99, 10, 0.1);
-  border: 1px solid rgba(232, 99, 10, 0.3);
+  background: rgba(56, 189, 248, 0.08);
+  border: 1px solid rgba(56, 189, 248, 0.25);
   font-family: var(--font-mono);
   font-size: 10.5px;
   color: var(--accent);

@@ -42,7 +42,7 @@ export default function Hero() {
           width: "600px",
           height: "600px",
           borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(232,99,10,0.07) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(56,189,248,0.07) 0%, transparent 70%)",
           pointerEvents: "none",
         }}
       />
@@ -62,7 +62,7 @@ export default function Hero() {
           fontSize: "clamp(12rem, 28vw, 26rem)",
           fontWeight: 900,
           fontStyle: "italic",
-          color: "rgba(240,235,225,0.025)",
+          color: "rgba(56,189,248,0.025)",
           lineHeight: 1,
           userSelect: "none",
           pointerEvents: "none",
