@@ -2,41 +2,39 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import BlueprintSheet from "@/components/ui/BlueprintSheet";
-import { Users, Award, Calendar, ShieldCheck, ChevronRight } from "lucide-react";
+import SectionShell from "@/components/ui/BlueprintSheet";
+import { Award } from "lucide-react";
 
 const organizations = [
   {
     period: "2026 – 2027",
     role: "Ketua Komunitas",
-    org: "Mokleters (Pengurus Supporter SMK Telkom Malang)",
-    badge: "KEPALA KOMUNITAS 90+ ANGGOTA",
-    badgeColor: "var(--accent-emerald)",
-    trophy: "Meraih Best Supporter Juara 5 pada event DBL Malang 2026/2027",
+    org: "Mokleters",
+    orgFull: "Pengurus Supporter SMK Telkom Malang",
+    highlight: "Best Supporter Juara 5 — DBL Malang 2026/2027",
     summary:
-      "Memimpin dan mengoordinasikan lebih dari 90 anggota dalam menjalankan kegiatan dan program komunitas supporter sekolah. Merencanakan, mengorganisir, dan mengawasi pelaksanaan berbagai kegiatan untuk memastikan tujuan organisasi tercapai secara efektif dan aman.",
+      "Memimpin dan mengoordinasikan lebih dari 90 anggota dalam menjalankan kegiatan supporter sekolah. Merencanakan, mengorganisir, dan mengawasi berbagai kegiatan untuk memastikan tujuan organisasi tercapai efektif dan aman.",
     points: [
-      "Memimpin 90+ anggota dalam koordinasi koreografi, logistik, dan keamanan suporter di arena DBL",
-      "Mengambil keputusan taktis di lapangan saat dinamika suporter berlangsung",
-      "Membina regenerasi anggota serta komunikasi intensif dengan pihak sekolah dan panitia eksternal",
+      "Koordinasi koreografi, logistik, dan keamanan suporter di arena DBL",
+      "Pengambilan keputusan taktis saat dinamika suporter berlangsung",
+      "Pembinaan regenerasi anggota & komunikasi dengan pihak sekolah",
     ],
-    skills: ["Community Leadership", "Decision Making", "Team Coordination", "Crisis Management", "Public Relations"],
+    skills: ["Community Leadership", "Decision Making", "Team Coordination", "Crisis Management"],
   },
   {
     period: "2024 – 2026",
     role: "Koordinator Sie 5",
-    org: "OSIS SMK Telkom Malang",
-    badge: "KETUA OPEN RECRUITMENT",
-    badgeColor: "var(--accent-blue)",
-    trophy: "Sukses menjaring 100+ pendaftar & memilih 17 pengurus baru",
+    org: "OSIS",
+    orgFull: "SMK Telkom Malang",
+    highlight: "100+ pendaftar — terpilih 17 pengurus baru",
     summary:
-      "Memegang tanggung jawab sebagai Ketua Pelaksana Open Recruitment OSIS Periode 2025–2026. Menyusun rancangan teknis perlengkapan, alur seleksi bertahap, dan manajemen risiko lapangan untuk memastikan seleksi berjalan objektif dan tepat sasaran.",
+      "Ketua Pelaksana Open Recruitment OSIS 2025–2026. Menyusun rancangan teknis, alur seleksi bertahap, dan manajemen risiko untuk memastikan seleksi berjalan objektif dan tepat sasaran.",
     points: [
-      "Memimpin proses kurasi calon pengurus OSIS dari 100+ pendaftar hingga terpilih 17 pengurus terbaik",
-      "Menyusun rundown operasional teknis serta SOP penanggulangan risiko kendala acara",
-      "Mengkoordinasikan kebutuhan lintas seksi agar seluruh agenda sekolah terlaksana tanpa kendala",
+      "Kurasi dari 100+ pendaftar hingga terpilih 17 pengurus terbaik",
+      "Rundown operasional & SOP penanggulangan risiko acara",
+      "Koordinasi lintas seksi agar agenda sekolah berjalan tanpa kendala",
     ],
-    skills: ["Event Management", "Recruitment Strategy", "Risk Mitigation", "Cross-Team Synergy", "Operational Rundown"],
+    skills: ["Event Management", "Recruitment", "Risk Mitigation", "Cross-Team Synergy"],
   },
 ];
 
@@ -45,199 +43,128 @@ export default function Organization() {
   const inView = useInView(ref, { once: true, margin: "-70px" });
 
   return (
-    <BlueprintSheet
-      id="organization"
-      sheetNumber="Sheet 05 — Jejak Kepemimpinan"
-      background="paper"
-    >
+    <SectionShell id="organization">
       <div ref={ref}>
-        {/* Section header */}
-        <div className="section-header">
-          <h2 className="section-title">Pengalaman Organisasi & Kepemimpinan</h2>
-          <p className="section-subtitle">
-            Bukti nyata kemampuan memimpin ratusan orang, mengeksekusi rekrutmen berskala besar,
-            dan mengambil keputusan strategis di lapangan.
-          </p>
-        </div>
+        <div className="section-eyebrow">Organisasi &amp; Kepemimpinan</div>
+        <h2 className="section-title" style={{ marginBottom: "3rem" }}>
+          Pengalaman lapangan nyata
+        </h2>
 
-        {/* Timeline cards */}
         <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
           {organizations.map((org, i) => (
             <motion.div
               key={org.role + org.period}
-              initial={{ opacity: 0, y: 18 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.45, delay: i * 0.12 }}
+              transition={{ duration: 0.5, delay: i * 0.12 }}
               style={{
                 background: "var(--bg-surface)",
-                border: "1px solid var(--border-subtle)",
+                border: "1px solid var(--border-faint)",
                 borderRadius: "var(--radius)",
-                padding: "1.75rem",
-                boxShadow: "var(--shadow-sm)",
-                display: "flex",
-                flexDirection: "column",
-                gap: "1.25rem",
+                padding: "2rem",
+                display: "grid",
+                gridTemplateColumns: "auto 1fr",
+                gap: "2rem",
+                alignItems: "start",
+                transition: "border-color 0.2s ease",
               }}
-              className="bp-card"
+              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.borderColor = "var(--border-subtle)"; }}
+              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.borderColor = "var(--border-faint)"; }}
             >
-              {/* Card Header: Role, Org, and Period */}
+              {/* Left: period */}
               <div
                 style={{
-                  display: "flex",
-                  flexWrap: "wrap",
-                  alignItems: "flex-start",
-                  justifyContent: "space-between",
-                  gap: "1rem",
-                  borderBottom: "1px solid var(--border-subtle)",
-                  paddingBottom: "1.25rem",
+                  fontFamily: "var(--font-mono)",
+                  fontSize: "11px",
+                  color: "var(--text-muted)",
+                  letterSpacing: "0.06em",
+                  paddingTop: "0.2rem",
+                  minWidth: "80px",
+                  writingMode: "vertical-rl",
+                  transform: "rotate(180deg)",
+                  userSelect: "none",
                 }}
               >
-                <div>
-                  <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.35rem" }}>
-                    <span
-                      style={{
-                        fontFamily: "var(--font-mono)",
-                        fontSize: "10px",
-                        padding: "0.2rem 0.5rem",
-                        background: "rgba(255, 255, 255, 0.05)",
-                        border: `1px solid ${org.badgeColor}`,
-                        color: org.badgeColor,
-                        borderRadius: "var(--radius-sm)",
-                        letterSpacing: "0.04em",
-                      }}
-                    >
-                      {org.badge}
-                    </span>
-                  </div>
+                {org.period}
+              </div>
 
+              {/* Right: content */}
+              <div>
+                {/* Role + org */}
+                <div style={{ marginBottom: "1rem" }}>
                   <h3
                     style={{
-                      fontFamily: "var(--font-heading)",
-                      fontSize: "1.35rem",
+                      fontFamily: "var(--font-display)",
+                      fontStyle: "italic",
                       fontWeight: 700,
-                      color: "var(--text-primary)",
-                      marginBottom: "0.2rem",
+                      fontSize: "1.4rem",
+                      color: "var(--cream)",
+                      marginBottom: "0.25rem",
                     }}
                   >
                     {org.role}
                   </h3>
-
-                  <div
-                    style={{
-                      fontFamily: "var(--font-body)",
-                      fontSize: "0.95rem",
-                      color: "var(--accent-blue)",
-                      fontWeight: 500,
-                    }}
-                  >
+                  <div style={{ fontSize: "0.9rem", color: "var(--accent)", fontWeight: 500 }}>
                     {org.org}
+                    <span style={{ color: "var(--text-muted)", fontWeight: 400 }}> — {org.orgFull}</span>
                   </div>
                 </div>
 
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "0.4rem",
-                    fontFamily: "var(--font-mono)",
-                    fontSize: "12px",
-                    color: "var(--text-muted)",
-                    background: "rgba(255, 255, 255, 0.03)",
-                    padding: "0.4rem 0.75rem",
-                    border: "1px solid var(--border-subtle)",
-                    borderRadius: "var(--radius-sm)",
-                  }}
-                >
-                  <Calendar size={13} style={{ color: "var(--accent-blue)" }} />
-                  <span>{org.period}</span>
-                </div>
-              </div>
-
-              {/* Trophy / Major Highlight Banner */}
-              {org.trophy && (
+                {/* Highlight */}
                 <div
                   style={{
                     display: "flex",
                     alignItems: "center",
                     gap: "0.6rem",
-                    padding: "0.75rem 1rem",
-                    background: "rgba(245, 158, 11, 0.08)",
-                    border: "1px solid rgba(245, 158, 11, 0.3)",
+                    padding: "0.65rem 1rem",
+                    background: "rgba(201,151,59,0.08)",
+                    border: "1px solid rgba(201,151,59,0.2)",
                     borderRadius: "var(--radius-sm)",
-                    color: "var(--accent-amber)",
-                    fontSize: "0.875rem",
-                    fontWeight: 600,
+                    marginBottom: "1.25rem",
+                    fontSize: "0.85rem",
+                    color: "var(--amber)",
+                    fontWeight: 500,
                   }}
                 >
-                  <Award size={18} style={{ flexShrink: 0 }} />
-                  <span>{org.trophy}</span>
+                  <Award size={15} style={{ flexShrink: 0 }} />
+                  {org.highlight}
                 </div>
-              )}
 
-              {/* Narrative Summary */}
-              <p
-                style={{
-                  color: "var(--text-secondary)",
-                  fontSize: "0.925rem",
-                  lineHeight: 1.7,
-                }}
-              >
-                {org.summary}
-              </p>
+                {/* Summary */}
+                <p style={{ color: "var(--text-secondary)", fontSize: "0.9rem", lineHeight: 1.75, fontWeight: 300, marginBottom: "1.25rem" }}>
+                  {org.summary}
+                </p>
 
-              {/* Key Contribution Points */}
-              <div>
-                <div
-                  style={{
-                    fontFamily: "var(--font-mono)",
-                    fontSize: "10.5px",
-                    color: "var(--accent-blue)",
-                    letterSpacing: "0.06em",
-                    marginBottom: "0.6rem",
-                  }}
-                >
-                  KONTRIBUSI UTAMA:
-                </div>
-                <div style={{ display: "flex", flexDirection: "column", gap: "0.45rem" }}>
+                {/* Points */}
+                <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "0.4rem", marginBottom: "1.25rem" }}>
                   {org.points.map((pt) => (
-                    <div
+                    <li
                       key={pt}
                       style={{
                         display: "flex",
-                        alignItems: "flex-start",
-                        gap: "0.6rem",
-                        fontSize: "0.875rem",
-                        color: "var(--text-primary)",
+                        gap: "0.5rem",
+                        fontSize: "0.85rem",
+                        color: "var(--text-secondary)",
                         lineHeight: 1.55,
                       }}
                     >
-                      <ChevronRight size={15} style={{ color: "var(--accent-blue)", flexShrink: 0, marginTop: "0.15rem" }} />
-                      <span>{pt}</span>
-                    </div>
+                      <span style={{ color: "var(--accent)", flexShrink: 0 }}>→</span>
+                      {pt}
+                    </li>
+                  ))}
+                </ul>
+
+                {/* Skill tags */}
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem" }}>
+                  {org.skills.map((skill) => (
+                    <span key={skill} className="tag">{skill}</span>
                   ))}
                 </div>
-              </div>
-
-              {/* Competencies Badges */}
-              <div
-                style={{
-                  display: "flex",
-                  flexWrap: "wrap",
-                  gap: "0.4rem",
-                  paddingTop: "0.5rem",
-                  borderTop: "1px solid var(--border-subtle)",
-                }}
-              >
-                {org.skills.map((skill) => (
-                  <span key={skill} className="mono-tag">
-                    {skill}
-                  </span>
-                ))}
               </div>
             </motion.div>
           ))}
         </div>
       </div>
-    </BlueprintSheet>
+    </SectionShell>
   );
 }

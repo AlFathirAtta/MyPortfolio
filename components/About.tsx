@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import BlueprintSheet from "@/components/ui/BlueprintSheet";
+import SectionShell from "@/components/ui/BlueprintSheet";
 import { Code2, Users2, Award } from "lucide-react";
 
 const stats = [
@@ -10,19 +10,19 @@ const stats = [
     icon: Code2,
     num: "02",
     label: "Proyek Web Nyata",
-    desc: "Sistem Informasi Tata Usaha (SITU) & NeonRent Live",
+    desc: "SITU (admin sekolah) & NeonRent (rental mobil)",
   },
   {
     icon: Users2,
     num: "90+",
     label: "Anggota Dipimpin",
-    desc: "Ketua Komunitas Mokleters & Koordinator Sie 5 OSIS",
+    desc: "Komunitas Mokleters & Koordinator OSIS",
   },
   {
     icon: Award,
     num: "05",
     label: "Prestasi Resmi",
-    desc: "Best Supporter DBL, Juara Boxing, Panjat Tebing, BMC",
+    desc: "DBL, Juara Boxing, Panjat Tebing, BMC",
   },
 ];
 
@@ -31,80 +31,76 @@ export default function About() {
   const inView = useInView(ref, { once: true, margin: "-60px" });
 
   return (
-    <BlueprintSheet id="about" background="paper-alt">
+    <SectionShell id="about" alt>
       <div ref={ref}>
-        {/* Section Header */}
-        <div className="section-header">
-          <h2 className="section-title">Tentang Saya</h2>
-          <p className="section-subtitle">
-            Latar belakang, filosofi pembuatan perangkat lunak, dan rekam jejak kepemimpinan.
-          </p>
-        </div>
+        {/* Eyebrow */}
+        <div className="section-eyebrow">Tentang Saya</div>
 
-        {/* 2-Column Clean Layout */}
+        {/* 2-col layout */}
         <div
+          className="about-grid"
           style={{
             display: "grid",
             gridTemplateColumns: "1.2fr 1fr",
-            gap: "3rem",
+            gap: "4rem",
             alignItems: "start",
           }}
-          className="about-grid"
         >
-          {/* Left: Bio Narrative */}
+          {/* Left: narrative */}
           <div>
-            <h3
+            <h2
               style={{
-                fontFamily: "var(--font-heading)",
-                fontSize: "1.35rem",
+                fontFamily: "var(--font-display)",
                 fontWeight: 700,
-                color: "var(--text-primary)",
-                marginBottom: "1rem",
-                lineHeight: 1.35,
-              }}
-            >
-              Membangun pengalaman web yang rapi, cepat, dan berdaya guna bagi pengguna nyata.
-            </h3>
-
-            <p
-              style={{
-                color: "var(--text-secondary)",
-                fontSize: "0.95rem",
-                lineHeight: 1.75,
-                marginBottom: "1.25rem",
-              }}
-            >
-              Saya adalah siswa tingkat akhir di jurusan Rekayasa Perangkat Lunak (RPL) SMK Telkom Malang,
-              dengan peminatan khusus pada Front End Web Development. Bagi saya, menulis kode bukan sekadar
-              membuat halaman tampil di layar, melainkan memastikan antarmuka mudah digunakan, memiliki aksesibilitas
-              yang baik, dan struktur kode yang mudah dipelihara.
-            </p>
-
-            <p
-              style={{
-                color: "var(--text-secondary)",
-                fontSize: "0.95rem",
-                lineHeight: 1.75,
+                fontStyle: "italic",
+                fontSize: "clamp(1.6rem, 3vw, 2.2rem)",
+                color: "var(--cream)",
+                lineHeight: 1.2,
+                letterSpacing: "-0.02em",
                 marginBottom: "1.5rem",
               }}
             >
-              Selain di bidang teknis, pengalaman memimpin komunitas 90+ orang dan mengorganisasi rekrutmen OSIS
-              membentuk kemampuan komunikasi yang lugas, pemecahan masalah yang tenang, serta sinergi yang solid
-              saat berkolaborasi dengan tim back-end maupun desainer.
+              Membangun antarmuka yang rapi,<br />
+              cepat, dan berdaya guna.
+            </h2>
+
+            <p
+              style={{
+                color: "var(--text-secondary)",
+                fontSize: "0.95rem",
+                lineHeight: 1.8,
+                marginBottom: "1.25rem",
+                fontWeight: 300,
+              }}
+            >
+              Saya adalah siswa tingkat akhir jurusan Rekayasa Perangkat Lunak (RPL) SMK Telkom Malang,
+              dengan peminatan khusus Front End Web Development. Bagi saya, menulis kode berarti
+              memastikan antarmuka mudah digunakan, aksesibel, dan strukturnya mudah dipelihara.
             </p>
 
-            {/* Quick Badges */}
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
-              {["SMK Telkom Malang", "Front End Development", "Clean Code", "Leadership & Public Speaking"].map((t) => (
-                <span key={t} className="mono-tag">
-                  {t}
-                </span>
+            <p
+              style={{
+                color: "var(--text-secondary)",
+                fontSize: "0.95rem",
+                lineHeight: 1.8,
+                marginBottom: "2rem",
+                fontWeight: 300,
+              }}
+            >
+              Pengalaman memimpin komunitas 90+ orang dan mengorganisasi rekrutmen OSIS membentuk
+              kemampuan komunikasi yang lugas dan kolaborasi solid bersama tim back-end maupun desainer.
+            </p>
+
+            {/* Badges */}
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem" }}>
+              {["SMK Telkom Malang", "Front End Development", "Clean Code", "Leadership"].map((t) => (
+                <span key={t} className="tag">{t}</span>
               ))}
             </div>
           </div>
 
-          {/* Right: 3 Clean Highlight Cards */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+          {/* Right: 3 stat cards */}
+          <div style={{ display: "flex", flexDirection: "column", gap: "1px", background: "var(--border-faint)", border: "1px solid var(--border-faint)", borderRadius: "var(--radius)" }}>
             {stats.map((s, idx) => {
               const Icon = s.icon;
               return (
@@ -114,24 +110,27 @@ export default function About() {
                   animate={inView ? { opacity: 1, x: 0 } : {}}
                   transition={{ duration: 0.4, delay: idx * 0.1 }}
                   style={{
-                    background: "var(--bg-surface)",
-                    border: "1px solid var(--border-subtle)",
-                    borderRadius: "var(--radius)",
-                    padding: "1.25rem 1.5rem",
+                    background: "var(--bg-raised)",
+                    padding: "1.5rem",
                     display: "flex",
                     alignItems: "center",
                     gap: "1.25rem",
+                    borderRadius: idx === 0 ? "var(--radius) var(--radius) 0 0" : idx === stats.length - 1 ? "0 0 var(--radius) var(--radius)" : "0",
+                    transition: "background 0.2s ease",
                   }}
-                  className="bp-card"
+                  onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = "var(--bg-card)"; }}
+                  onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = "var(--bg-raised)"; }}
                 >
+                  {/* Number */}
                   <div
                     style={{
-                      fontFamily: "var(--font-heading)",
-                      fontSize: "2rem",
-                      fontWeight: 700,
-                      color: "var(--accent-blue)",
+                      fontFamily: "var(--font-display)",
+                      fontStyle: "italic",
+                      fontSize: "2.25rem",
+                      fontWeight: 900,
+                      color: "var(--accent)",
                       lineHeight: 1,
-                      minWidth: "60px",
+                      minWidth: "56px",
                     }}
                   >
                     {s.num}
@@ -140,16 +139,15 @@ export default function About() {
                   <div>
                     <div
                       style={{
-                        fontFamily: "var(--font-heading)",
-                        fontSize: "1rem",
+                        fontSize: "0.875rem",
                         fontWeight: 600,
-                        color: "var(--text-primary)",
+                        color: "var(--cream)",
                         marginBottom: "0.2rem",
                       }}
                     >
                       {s.label}
                     </div>
-                    <div style={{ fontSize: "12.5px", color: "var(--text-muted)", lineHeight: 1.4 }}>
+                    <div style={{ fontSize: "0.8rem", color: "var(--text-muted)", lineHeight: 1.4 }}>
                       {s.desc}
                     </div>
                   </div>
@@ -159,6 +157,6 @@ export default function About() {
           </div>
         </div>
       </div>
-    </BlueprintSheet>
+    </SectionShell>
   );
 }

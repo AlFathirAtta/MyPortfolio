@@ -22,102 +22,175 @@ export default function Hero() {
     <section
       id="hero"
       style={{
-        minHeight: "88vh",
+        minHeight: "100vh",
         display: "flex",
-        alignItems: "center",
-        padding: "7.5rem 0 4rem 0",
+        flexDirection: "column",
+        justifyContent: "flex-end",
+        padding: "0 0 5rem 0",
         position: "relative",
         background: "var(--bg-main)",
+        overflow: "hidden",
       }}
     >
-      <div className="container" style={{ width: "100%" }}>
+      {/* Ambient glow top-right */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          top: "-10%",
+          right: "-5%",
+          width: "600px",
+          height: "600px",
+          borderRadius: "50%",
+          background: "radial-gradient(circle, rgba(232,99,10,0.07) 0%, transparent 70%)",
+          pointerEvents: "none",
+        }}
+      />
+
+      {/* Large background number */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 0.5 }}
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          top: "50%",
+          right: "-2%",
+          transform: "translateY(-60%)",
+          fontFamily: "var(--font-display)",
+          fontSize: "clamp(12rem, 28vw, 26rem)",
+          fontWeight: 900,
+          fontStyle: "italic",
+          color: "rgba(240,235,225,0.025)",
+          lineHeight: 1,
+          userSelect: "none",
+          pointerEvents: "none",
+          letterSpacing: "-0.05em",
+        }}
+      >
+        FE
+      </motion.div>
+
+      <div className="container" style={{ width: "100%", position: "relative", zIndex: 1 }}>
+        {/* Top row: status + photo */}
         <div
+          className="hero-grid"
           style={{
             display: "grid",
-            gridTemplateColumns: "1.25fr 0.75fr",
-            gap: "3.5rem",
-            alignItems: "center",
+            gridTemplateColumns: "1fr auto",
+            alignItems: "flex-end",
+            gap: "3rem",
+            marginBottom: "3rem",
           }}
-          className="hero-grid"
         >
-          {/* Left Column: Clean Typography & Presentation */}
-          <div>
-            {/* Status Pill */}
-            <motion.div
-              initial={{ opacity: 0, y: -8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4 }}
-              style={{ marginBottom: "1.25rem" }}
+          {/* Status */}
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <span className="status-pill">
+              <span className="status-dot" />
+              Terbuka untuk Magang &amp; Proyek Web
+            </span>
+          </motion.div>
+
+          {/* Photo */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.15 }}
+            style={{
+              width: "clamp(80px, 12vw, 130px)",
+              aspectRatio: "1/1",
+              borderRadius: "50%",
+              overflow: "hidden",
+              border: "2px solid var(--border-subtle)",
+              position: "relative",
+              flexShrink: 0,
+            }}
+          >
+            <Image
+              src={profilePic}
+              alt="Muhammad Al Fathir Attaullah"
+              fill
+              style={{ objectFit: "cover", objectPosition: "center top" }}
+              sizes="130px"
+              priority
+            />
+          </motion.div>
+        </div>
+
+        {/* Big Name */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <h1
+            style={{
+              fontFamily: "var(--font-display)",
+              fontWeight: 900,
+              fontStyle: "italic",
+              fontSize: "clamp(3rem, 8.5vw, 7.5rem)",
+              lineHeight: 0.95,
+              letterSpacing: "-0.03em",
+              color: "var(--cream)",
+              marginBottom: "1rem",
+            }}
+          >
+            Muhammad Al Fathir<br />
+            <span style={{ color: "var(--accent)" }}>Attaullah</span>
+          </h1>
+        </motion.div>
+
+        {/* Bottom row: role + description + CTAs */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.55, delay: 0.3 }}
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            alignItems: "flex-start",
+            justifyContent: "space-between",
+            gap: "2rem",
+            marginTop: "1.5rem",
+            paddingTop: "1.5rem",
+            borderTop: "1px solid var(--border-faint)",
+          }}
+        >
+          {/* Left: role + desc */}
+          <div style={{ maxWidth: "520px" }}>
+            <div
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: "11px",
+                letterSpacing: "0.1em",
+                color: "var(--accent)",
+                textTransform: "uppercase",
+                marginBottom: "0.75rem",
+              }}
             >
-              <span className="status-pill">
-                <span className="status-dot" />
-                <span>Terbuka untuk Magang & Proyek Web</span>
-              </span>
-            </motion.div>
-
-            {/* Name Headline */}
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45, delay: 0.08 }}
-            >
-              <h1
-                style={{
-                  fontFamily: "var(--font-heading)",
-                  fontWeight: 700,
-                  fontSize: "clamp(2.5rem, 5vw, 3.65rem)",
-                  lineHeight: 1.1,
-                  color: "#FFFFFF",
-                  letterSpacing: "-0.03em",
-                  marginBottom: "0.85rem",
-                }}
-              >
-                Muhammad Al Fathir Attaullah
-              </h1>
-
-              <div
-                style={{
-                  fontFamily: "var(--font-body)",
-                  fontSize: "1.15rem",
-                  color: "var(--accent-blue)",
-                  fontWeight: 500,
-                  marginBottom: "1.25rem",
-                }}
-              >
-                Front End Developer · Siswa RPL SMK Telkom Malang
-              </div>
-            </motion.div>
-
-            {/* Clean Description */}
-            <motion.p
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45, delay: 0.16 }}
+              Front End Developer · Siswa RPL SMK Telkom Malang
+            </div>
+            <p
               style={{
                 color: "var(--text-secondary)",
-                fontSize: "1rem",
-                lineHeight: 1.7,
-                maxWidth: "54ch",
-                marginBottom: "2rem",
+                fontSize: "0.95rem",
+                lineHeight: 1.75,
+                fontWeight: 300,
               }}
             >
-              Fokus merancang dan membangun antarmuka web yang bersih, responsif, dan mudah digunakan.
-              Memadukan kerapian kode front-end dengan pengalaman kepemimpinan organisasi nyata.
-            </motion.p>
+              Fokus merancang antarmuka web yang bersih, responsif, dan mudah digunakan.
+              Memadukan kode front-end rapi dengan pengalaman kepemimpinan organisasi nyata.
+            </p>
+          </div>
 
-            {/* Action Buttons & Socials */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45, delay: 0.24 }}
-              style={{
-                display: "flex",
-                flexWrap: "wrap",
-                alignItems: "center",
-                gap: "1rem",
-                marginBottom: "2.5rem",
-              }}
-            >
+          {/* Right: CTAs + socials */}
+          <div style={{ display: "flex", flexDirection: "column", gap: "1rem", alignItems: "flex-end" }}>
+            <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap", justifyContent: "flex-end" }}>
               <a
                 href="#projects"
                 id="hero-cta-projects"
@@ -128,7 +201,7 @@ export default function Hero() {
                 className="btn btn-primary"
               >
                 <span>Lihat Proyek</span>
-                <ArrowRight size={15} />
+                <ArrowRight size={14} />
               </a>
 
               <a
@@ -140,149 +213,51 @@ export default function Hero() {
                 }}
                 className="btn btn-secondary"
               >
-                <span>Hubungi Saya</span>
+                Hubungi Saya
               </a>
-
-              {/* Social icons */}
-              <div style={{ display: "flex", alignItems: "center", gap: "0.6rem", marginLeft: "0.5rem" }}>
-                <a
-                  href="https://github.com/AlFathirAtta"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="GitHub"
-                  style={{
-                    width: "36px",
-                    height: "36px",
-                    borderRadius: "6px",
-                    border: "1px solid var(--border-subtle)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    color: "var(--text-secondary)",
-                    transition: "all 0.15s ease",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.color = "#FFFFFF";
-                    e.currentTarget.style.borderColor = "var(--border-medium)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.color = "var(--text-secondary)";
-                    e.currentTarget.style.borderColor = "var(--border-subtle)";
-                  }}
-                >
-                  <GithubIcon size={17} />
-                </a>
-
-                <a
-                  href="https://www.linkedin.com/in/al-fathir-attaullah-48891040b/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="LinkedIn"
-                  style={{
-                    width: "36px",
-                    height: "36px",
-                    borderRadius: "6px",
-                    border: "1px solid var(--border-subtle)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    color: "var(--text-secondary)",
-                    transition: "all 0.15s ease",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.color = "#FFFFFF";
-                    e.currentTarget.style.borderColor = "var(--border-medium)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.color = "var(--text-secondary)";
-                    e.currentTarget.style.borderColor = "var(--border-subtle)";
-                  }}
-                >
-                  <LinkedinIcon size={17} />
-                </a>
-
-                <a
-                  href="mailto:muhammadattaullahh@gmail.com"
-                  aria-label="Email"
-                  style={{
-                    width: "36px",
-                    height: "36px",
-                    borderRadius: "6px",
-                    border: "1px solid var(--border-subtle)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    color: "var(--text-secondary)",
-                    transition: "all 0.15s ease",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.color = "#FFFFFF";
-                    e.currentTarget.style.borderColor = "var(--border-medium)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.color = "var(--text-secondary)";
-                    e.currentTarget.style.borderColor = "var(--border-subtle)";
-                  }}
-                >
-                  <Mail size={17} />
-                </a>
-              </div>
-            </motion.div>
-
-            {/* Simple Tech Stack Footnote */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "0.75rem",
-                fontFamily: "var(--font-mono)",
-                fontSize: "12px",
-                color: "var(--text-muted)",
-              }}
-            >
-              <span>STACK:</span>
-              <span style={{ color: "var(--text-secondary)" }}>
-                HTML5 · CSS3 · JavaScript (ES6+) · React · Next.js · Git
-              </span>
-            </motion.div>
-          </div>
-
-          {/* Right Column: Clean, Dignified Photo Frame */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.96 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.15 }}
-            style={{
-              display: "flex",
-              justifyContent: "center",
-            }}
-          >
-            <div
-              style={{
-                width: "100%",
-                maxWidth: "340px",
-                aspectRatio: "3/4",
-                borderRadius: "var(--radius)",
-                overflow: "hidden",
-                border: "1px solid var(--border-medium)",
-                background: "var(--bg-surface)",
-                position: "relative",
-              }}
-            >
-              <Image
-                src={profilePic}
-                alt="Muhammad Al Fathir Attaullah"
-                fill
-                style={{ objectFit: "cover", objectPosition: "center top" }}
-                sizes="(max-width: 768px) 80vw, 340px"
-                priority
-              />
             </div>
-          </motion.div>
-        </div>
+
+            {/* Social icons */}
+            <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+              {[
+                { href: "https://github.com/AlFathirAtta", label: "GitHub", icon: <GithubIcon size={16} /> },
+                { href: "https://www.linkedin.com/in/al-fathir-attaullah-48891040b/", label: "LinkedIn", icon: <LinkedinIcon size={16} /> },
+                { href: "mailto:muhammadattaullahh@gmail.com", label: "Email", icon: <Mail size={16} /> },
+              ].map((s) => (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  target={s.href.startsWith("http") ? "_blank" : undefined}
+                  rel="noopener noreferrer"
+                  aria-label={s.label}
+                  style={{
+                    width: "34px",
+                    height: "34px",
+                    borderRadius: "var(--radius-sm)",
+                    border: "1px solid var(--border-subtle)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    color: "var(--text-secondary)",
+                    transition: "all 0.15s ease",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.color = "var(--cream)";
+                    e.currentTarget.style.borderColor = "var(--border-medium)";
+                    e.currentTarget.style.background = "rgba(240,235,225,0.05)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.color = "var(--text-secondary)";
+                    e.currentTarget.style.borderColor = "var(--border-subtle)";
+                    e.currentTarget.style.background = "transparent";
+                  }}
+                >
+                  {s.icon}
+                </a>
+              ))}
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

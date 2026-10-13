@@ -1,10 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { AnimatePresence, motion, useScroll, useSpring } from "framer-motion";
 import { Menu, X, Download } from "lucide-react";
-import Image from "next/image";
-import profilePic from "@/public/Profle.jpg";
 
 const navLinks = [
   { href: "#about",        label: "Tentang" },
@@ -20,19 +18,16 @@ export default function Navbar() {
   const [mobileOpen,    setMobileOpen]    = useState(false);
   const [activeSection, setActiveSection] = useState("");
 
-  // Scroll progress for the thin bar below nav
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
+    const handleScroll = () => setScrolled(window.scrollY > 40);
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection("#" + entry.target.id);
-          }
+          if (entry.isIntersecting) setActiveSection("#" + entry.target.id);
         });
       },
       { rootMargin: "-40% 0px -55% 0px" }
@@ -52,16 +47,6 @@ export default function Navbar() {
     document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const sheetLabels: Record<string, string> = {
-    "#about":        "Sheet 02",
-    "#skills":       "Sheet 03",
-    "#projects":     "Sheet 04",
-    "#organization": "Sheet 05",
-    "#achievements": "Sheet 05B",
-    "#contact":      "Sheet 06",
-  };
-  const currentSheet = sheetLabels[activeSection] ?? "Sheet 01";
-
   return (
     <>
       <nav
@@ -77,15 +62,16 @@ export default function Navbar() {
             bottom: 0,
             left: 0,
             right: 0,
-            height: "2px",
-            background: "var(--blue-bright)",
+            height: "1px",
+            background: "var(--accent)",
             transformOrigin: "left",
             scaleX,
             zIndex: 101,
-            opacity: scrolled ? 1 : 0,
+            opacity: scrolled ? 0.7 : 0,
             transition: "opacity 0.3s ease",
           }}
         />
+
         <div
           className="container"
           style={{
@@ -95,44 +81,21 @@ export default function Navbar() {
             height: "64px",
           }}
         >
-          {/* Logo */}
+          {/* Wordmark */}
           <a
             href="#"
             onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}
             style={{
-              fontFamily: "var(--font-heading)",
-              fontWeight: 600,
-              fontSize: "1.05rem",
-              color: "var(--blue-primary)",
-              letterSpacing: "-0.01em",
-              display: "flex",
-              alignItems: "center",
-              gap: "0.5rem",
+              fontFamily: "var(--font-display)",
+              fontWeight: 700,
+              fontStyle: "italic",
+              fontSize: "1.2rem",
+              color: "var(--cream)",
+              letterSpacing: "-0.02em",
             }}
             aria-label="Ke atas — Muhammad Al Fathir Attaullah"
           >
-            {/* Profile avatar */}
-            <div
-              style={{
-                width: "28px",
-                height: "28px",
-                borderRadius: "50%",
-                overflow: "hidden",
-                position: "relative",
-                border: "1.5px solid var(--grid-line)",
-                flexShrink: 0,
-              }}
-            >
-              <Image
-                src={profilePic}
-                alt="Al Fathir Attaullah"
-                fill
-                style={{ objectFit: "cover", objectPosition: "center top" }}
-                sizes="28px"
-                priority
-              />
-            </div>
-            PortAtta
+            Atta<span style={{ color: "var(--accent)" }}>.</span>
           </a>
 
           {/* Desktop Nav */}
@@ -141,7 +104,7 @@ export default function Navbar() {
             style={{
               display: "flex",
               alignItems: "center",
-              gap: "0.1rem",
+              gap: "0.25rem",
             }}
           >
             {navLinks.map((link) => {
@@ -154,29 +117,41 @@ export default function Navbar() {
                   style={{
                     background: "none",
                     border: "none",
-                    borderBottom: isActive ? "2px solid var(--blue-bright)" : "2px solid transparent",
                     cursor: "pointer",
-                    padding: "0.4rem 0.85rem",
+                    padding: "0.45rem 0.9rem",
                     fontFamily: "var(--font-body)",
-                    fontSize: "0.9rem",
-                    fontWeight: isActive ? 600 : 400,
-                    color: isActive ? "var(--blue-primary)" : "var(--ink-muted)",
-                    transition: "all var(--transition-fast)",
-                    marginBottom: "-1px",  /* align to navbar border */
+                    fontSize: "0.875rem",
+                    fontWeight: isActive ? 500 : 400,
+                    color: isActive ? "var(--cream)" : "var(--text-secondary)",
+                    transition: "color 0.15s ease",
+                    position: "relative",
                   }}
                   onMouseEnter={(e) => {
-                    if (!isActive) {
-                      (e.currentTarget).style.color = "var(--ink)";
-                    }
+                    if (!isActive) (e.currentTarget).style.color = "var(--cream)";
                   }}
                   onMouseLeave={(e) => {
-                    if (!isActive) {
-                      (e.currentTarget).style.color = "var(--ink-muted)";
-                    }
+                    if (!isActive) (e.currentTarget).style.color = "var(--text-secondary)";
                   }}
                   aria-current={isActive ? "page" : undefined}
                 >
                   {link.label}
+                  {isActive && (
+                    <motion.span
+                      layoutId="nav-indicator"
+                      style={{
+                        position: "absolute",
+                        bottom: "4px",
+                        left: "50%",
+                        transform: "translateX(-50%)",
+                        width: "4px",
+                        height: "4px",
+                        borderRadius: "50%",
+                        background: "var(--accent)",
+                        display: "block",
+                      }}
+                      transition={{ type: "spring", stiffness: 400, damping: 35 }}
+                    />
+                  )}
                 </button>
               );
             })}
@@ -185,47 +160,12 @@ export default function Navbar() {
               href="/cv.pdf"
               download
               id="nav-download-cv"
-              className="btn btn-secondary"
-              style={{ marginLeft: "0.75rem", padding: "0.45rem 1rem", fontSize: "0.875rem" }}
+              className="btn btn-primary"
+              style={{ marginLeft: "0.75rem", padding: "0.5rem 1.1rem", fontSize: "0.83rem" }}
             >
-              <Download size={14} />
+              <Download size={13} />
               Unduh CV
             </a>
-
-            {/* Section 6.5: Nomor Sheet sebagai Progress — animated transition */}
-            <div
-              id="nav-sheet-progress"
-              style={{
-                marginLeft: "0.5rem",
-                padding: "0.3rem 0.65rem",
-                fontFamily: "var(--font-mono)",
-                fontSize: "11px",
-                color: "var(--blue-primary)",
-                border: "1px solid var(--grid-line)",
-                borderRadius: "var(--radius)",
-                background: "var(--paper-alt)",
-                letterSpacing: "0.06em",
-                fontWeight: 500,
-                position: "relative",
-                overflow: "hidden",
-                minWidth: "72px",
-                textAlign: "center",
-              }}
-              aria-label="Nomor sheet aktif"
-            >
-              <AnimatePresence mode="wait">
-                <motion.span
-                  key={currentSheet}
-                  initial={{ opacity: 0, y: 6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -6 }}
-                  transition={{ duration: 0.2, ease: "easeOut" }}
-                  style={{ display: "block" }}
-                >
-                  {currentSheet}
-                </motion.span>
-              </AnimatePresence>
-            </div>
           </div>
 
           {/* Mobile Hamburger */}
@@ -236,18 +176,18 @@ export default function Navbar() {
             style={{
               display: "none",
               background: "none",
-              border: "1px solid var(--grid-line)",
+              border: "1px solid var(--border-subtle)",
               borderRadius: "var(--radius)",
               cursor: "pointer",
-              color: "var(--ink)",
-              padding: "0.35rem 0.5rem",
+              color: "var(--cream)",
+              padding: "0.4rem 0.55rem",
               alignItems: "center",
               justifyContent: "center",
             }}
             aria-label="Buka/tutup menu navigasi"
             aria-expanded={mobileOpen}
           >
-            {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+            {mobileOpen ? <X size={18} /> : <Menu size={18} />}
           </button>
         </div>
 
@@ -259,9 +199,10 @@ export default function Navbar() {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               style={{
-                background: "var(--paper-alt)",
-                borderTop: "1px solid var(--grid-line)",
+                background: "rgba(8,8,8,0.97)",
+                borderTop: "1px solid var(--border-faint)",
                 overflow: "hidden",
+                backdropFilter: "blur(20px)",
               }}
             >
               <div
@@ -270,7 +211,7 @@ export default function Navbar() {
                   display: "flex",
                   flexDirection: "column",
                   gap: "0.1rem",
-                  padding: "0.75rem var(--container-padding) 1rem",
+                  padding: "1rem var(--container-padding) 1.25rem",
                 }}
               >
                 {navLinks.map((link) => {
@@ -280,17 +221,17 @@ export default function Navbar() {
                       key={link.href}
                       onClick={() => handleNavClick(link.href)}
                       style={{
-                        background: isActive ? "rgba(79,166,232,0.08)" : "none",
+                        background: "none",
                         border: "none",
-                        borderLeft: isActive ? "2px solid var(--blue-bright)" : "2px solid transparent",
+                        borderLeft: isActive ? "2px solid var(--accent)" : "2px solid transparent",
                         cursor: "pointer",
-                        padding: "0.7rem 0.85rem",
+                        padding: "0.75rem 0.85rem",
                         fontFamily: "var(--font-body)",
                         fontSize: "0.95rem",
-                        fontWeight: isActive ? 600 : 400,
-                        color: isActive ? "var(--blue-primary)" : "var(--ink-muted)",
+                        fontWeight: isActive ? 500 : 400,
+                        color: isActive ? "var(--cream)" : "var(--text-secondary)",
                         textAlign: "left",
-                        transition: "all var(--transition-fast)",
+                        transition: "all 0.15s ease",
                       }}
                     >
                       {link.label}
@@ -301,7 +242,7 @@ export default function Navbar() {
                   href="/cv.pdf"
                   download
                   className="btn btn-primary"
-                  style={{ marginTop: "0.5rem", justifyContent: "center" }}
+                  style={{ marginTop: "0.75rem", justifyContent: "center" }}
                 >
                   <Download size={14} />
                   Unduh CV

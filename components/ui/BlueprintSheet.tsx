@@ -3,26 +3,23 @@
 import React, { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 
-interface BlueprintSheetProps {
+interface SectionShellProps {
   id: string;
-  sheetNumber?: string;
   children: React.ReactNode;
-  background?: "paper" | "paper-alt";
+  alt?: boolean;
   className?: string;
   style?: React.CSSProperties;
 }
 
-export default function BlueprintSheet({
+export default function SectionShell({
   id,
   children,
-  background = "paper",
+  alt = false,
   className = "",
   style = {},
-}: BlueprintSheetProps) {
+}: SectionShellProps) {
   const sectionRef = useRef<HTMLElement | null>(null);
-  const inView = useInView(sectionRef, { once: true, margin: "-10% 0px -10% 0px" });
-
-  const bgStyle = background === "paper-alt" ? "var(--bg-surface)" : "var(--bg-main)";
+  const inView = useInView(sectionRef, { once: true, margin: "-8% 0px -8% 0px" });
 
   return (
     <section
@@ -30,17 +27,17 @@ export default function BlueprintSheet({
       ref={sectionRef}
       className={`section-padding ${className}`}
       style={{
-        background: bgStyle,
+        background: alt ? "var(--bg-surface)" : "var(--bg-main)",
         position: "relative",
-        borderTop: "1px solid var(--border-subtle)",
+        borderTop: "1px solid var(--border-faint)",
         ...style,
       }}
     >
       <div className="container">
         <motion.div
-          initial={{ opacity: 0, y: 15 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.45, ease: "easeOut" }}
+          transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
         >
           {children}
         </motion.div>

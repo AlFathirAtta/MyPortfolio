@@ -1,71 +1,66 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
 @import "tailwindcss";
 
 /* ============================================
-   DESIGN TOKENS — Regal Midnight Sapphire (Elegan Premium)
+   DESIGN TOKENS — Warm Dark Editorial
    ============================================ */
 :root {
-  /* Dominant Regal Midnight Navy Backgrounds */
-  --bg-main:       #060C18; /* Deep Oceanic Midnight Navy */
-  --bg-surface:    #0C1629; /* Velvet Deep Sapphire Slate */
-  --bg-card:       #111E36; /* Elevated Sapphire Card */
-  --bg-card-hover: #162644; /* Interactive Hover Surface */
-  --bg-glass:      rgba(8, 16, 32, 0.88);
+  /* Backgrounds */
+  --bg-void:    #080808;
+  --bg-main:    #0D0D0D;
+  --bg-surface: #141414;
+  --bg-raised:  #1A1A1A;
+  --bg-card:    #1F1F1F;
 
-  /* Precise Luxury Hairline Borders */
-  --border-subtle: rgba(96, 165, 250, 0.12); /* Delicate Sapphire Border */
-  --border-medium: rgba(96, 165, 250, 0.24);
-  --border-focus:  rgba(59, 130, 246, 0.6);
+  /* Core Palette */
+  --cream:      #F0EBE1;
+  --cream-dim:  #B8B0A4;
+  --cream-muted:#6B6560;
 
-  /* Typography Colors */
-  --text-primary:  #F8FAFC; /* Crisp Ice Slate White */
-  --text-secondary:#94A3B8; /* Refined Slate Gray */
-  --text-muted:    #64748B; /* Subtle Cool Slate */
+  /* Accent — Burnt Orange */
+  --accent:       #E8630A;
+  --accent-warm:  #F0780F;
+  --accent-muted: rgba(232, 99, 10, 0.15);
+  --accent-glow:  rgba(232, 99, 10, 0.25);
 
-  /* Curated Premium Blue Accents (Dominant Blue) */
-  --accent-blue:       #2563EB; /* Regal Royal Blue (Solid CTA) */
-  --accent-blue-deep:  #1D4ED8; /* Deep Royal Navy */
-  --accent-blue-light: #60A5FA; /* Ice Sapphire Highlight */
-  --accent-blue-soft:  rgba(59, 130, 246, 0.12);
+  /* Secondary accent — Dusty Amber */
+  --amber:      #C9973B;
+  --amber-dim:  rgba(201, 151, 59, 0.2);
 
-  /* Complementary Refined Accents */
-  --accent-gold:   #D4AF37; /* Champagne / Antique Gold for Honors */
-  --accent-emerald:#10B981; /* Precision Emerald Status Dot */
+  /* Borders */
+  --border-faint:  rgba(240, 235, 225, 0.06);
+  --border-subtle: rgba(240, 235, 225, 0.1);
+  --border-medium: rgba(240, 235, 225, 0.18);
 
-  /* Backwards Compatibility Mapping */
-  --paper:         var(--bg-main);
-  --paper-alt:     var(--bg-surface);
-  --grid-line:     var(--border-subtle);
-  --ink:           var(--text-primary);
-  --ink-muted:     var(--text-secondary);
-  --ink-subtle:    var(--text-muted);
-  --blue-primary:  var(--accent-blue-light);
-  --blue-bright:   #93C5FD;
-  --amber-seal:    var(--accent-gold);
+  /* Text */
+  --text-primary:   #F0EBE1;
+  --text-secondary: #9E9690;
+  --text-muted:     #5C5650;
 
-  /* Elevation Shadows */
-  --shadow-sm:     0 2px 10px rgba(2, 6, 16, 0.5);
-  --shadow-md:     0 12px 35px rgba(2, 6, 16, 0.7);
+  /* Shadows */
+  --shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 8px 40px rgba(0, 0, 0, 0.7);
+  --shadow-glow: 0 0 40px rgba(232, 99, 10, 0.15);
 
   /* Fonts */
-  --font-heading: 'Space Grotesk', -apple-system, sans-serif;
+  --font-display: 'Playfair Display', Georgia, serif;
   --font-body:    'IBM Plex Sans', -apple-system, sans-serif;
   --font-mono:    'IBM Plex Mono', monospace;
 
-  /* Spacing */
-  --section-padding:   6.5rem 0;
-  --container-max:     1160px;
+  /* Layout */
+  --section-padding:   7rem 0;
+  --container-max:     1120px;
   --container-padding: 1.5rem;
 
-  /* Border / Radius */
-  --radius-sm: 4px;
-  --radius:    8px;
+  /* Radius */
+  --radius-sm: 3px;
+  --radius:    6px;
   --radius-lg: 12px;
   --radius-full: 9999px;
 
   /* Transitions */
-  --transition-fast:   0.15s ease;
-  --transition-normal: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out:   cubic-bezier(0.16, 1, 0.3, 1);
+  --transition: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* ============================================
@@ -79,8 +74,8 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 80px;
-  background-color: var(--bg-main);
+  scroll-padding-top: 72px;
+  background-color: var(--bg-void);
   color-scheme: dark;
 }
 
@@ -89,18 +84,18 @@ body {
   background-color: var(--bg-main);
   color: var(--text-primary);
   font-size: 16px;
-  line-height: 1.625;
+  line-height: 1.65;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading);
+  font-family: var(--font-display);
   font-weight: 700;
   color: var(--text-primary);
-  line-height: 1.18;
-  letter-spacing: -0.02em;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
 }
 
 a {
@@ -108,26 +103,23 @@ a {
   text-decoration: none;
 }
 
-img {
-  max-width: 100%;
-  height: auto;
-}
+img { max-width: 100%; height: auto; }
 
 ::selection {
-  background-color: rgba(37, 99, 235, 0.35);
-  color: #FFFFFF;
+  background-color: rgba(232, 99, 10, 0.35);
+  color: var(--cream);
 }
 
 /* ============================================
    SCROLLBAR
    ============================================ */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--bg-main); }
-::-webkit-scrollbar-thumb { background: rgba(96, 165, 250, 0.2); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: var(--accent-blue-light); }
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg-void); }
+::-webkit-scrollbar-thumb { background: #2A2A2A; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 
 /* ============================================
-   LAYOUT UTILITIES
+   LAYOUT
    ============================================ */
 .container {
   max-width: var(--container-max);
@@ -135,61 +127,97 @@ img {
   padding: 0 var(--container-padding);
 }
 
-.section-padding {
-  padding: var(--section-padding);
-}
+.section-padding { padding: var(--section-padding); }
 
 /* ============================================
    TYPOGRAPHY UTILITIES
    ============================================ */
 .mono {
   font-family: var(--font-mono);
-  font-size: 12px;
-  letter-spacing: 0.02em;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.label-accent {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* Section heading system */
+.section-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.section-eyebrow::before {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: var(--accent);
+  flex-shrink: 0;
 }
 
 .section-title {
-  font-family: var(--font-heading);
-  font-size: clamp(1.85rem, 3.5vw, 2.5rem);
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3rem);
   font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 0.6rem;
-  line-height: 1.15;
-  letter-spacing: -0.025em;
+  color: var(--cream);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.75rem;
 }
 
 .section-subtitle {
-  color: var(--text-secondary);
+  font-family: var(--font-body);
   font-size: 0.95rem;
-  line-height: 1.7;
-  max-width: 62ch;
-}
-
-.section-header {
-  margin-bottom: 2.75rem;
-  padding-left: 1.1rem;
-  border-left: 3px solid var(--accent-blue);
+  color: var(--text-secondary);
+  line-height: 1.75;
+  max-width: 56ch;
+  font-weight: 300;
 }
 
 /* ============================================
-   CARDS & SURFACES
+   DIVIDER LINE
    ============================================ */
-.bp-card {
-  background: var(--bg-surface);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-sm);
-  transition:
-    border-color var(--transition-fast),
-    box-shadow   var(--transition-normal),
-    background-color var(--transition-fast);
-  position: relative;
+.divider {
+  border: none;
+  border-top: 1px solid var(--border-faint);
+  margin: 0;
 }
 
-.bp-card:hover {
-  border-color: var(--border-medium);
-  background: var(--bg-card);
-  box-shadow: var(--shadow-md);
+/* ============================================
+   CARDS
+   ============================================ */
+.card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-faint);
+  border-radius: var(--radius);
+  transition: border-color var(--transition), background var(--transition);
+}
+
+.card:hover {
+  border-color: var(--border-subtle);
+  background: var(--bg-raised);
 }
 
 /* ============================================
@@ -199,122 +227,154 @@ img {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.65rem 1.25rem;
+  padding: 0.7rem 1.4rem;
   font-family: var(--font-body);
-  font-size: 0.9rem;
-  font-weight: 600;
-  border-radius: var(--radius);
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: var(--radius-sm);
   cursor: pointer;
   border: 1px solid transparent;
   text-decoration: none;
-  transition: all var(--transition-fast);
+  transition: all var(--transition);
   white-space: nowrap;
+  letter-spacing: 0.01em;
 }
 
-.btn:active {
-  transform: scale(0.98);
-}
+.btn:active { transform: scale(0.97); }
 
+/* Primary: Filled Orange */
 .btn-primary {
-  background: var(--accent-blue);
+  background: var(--accent);
   color: #FFFFFF;
-  border-color: #3B82F6;
-  box-shadow: 0 2px 12px rgba(37, 99, 235, 0.3);
+  border-color: var(--accent);
 }
 
 .btn-primary:hover {
-  background: #1D4ED8;
-  border-color: #60A5FA;
-  box-shadow: 0 4px 18px rgba(37, 99, 235, 0.45);
+  background: var(--accent-warm);
+  border-color: var(--accent-warm);
+  box-shadow: 0 4px 20px rgba(232, 99, 10, 0.4);
 }
 
+/* Secondary: Outlined Cream */
 .btn-secondary {
-  background: rgba(14, 28, 52, 0.6);
-  color: var(--text-primary);
-  border: 1px solid var(--border-medium);
+  background: transparent;
+  color: var(--cream);
+  border-color: var(--border-medium);
 }
 
 .btn-secondary:hover {
-  background: rgba(37, 99, 235, 0.15);
-  border-color: var(--accent-blue-light);
-  color: #FFFFFF;
+  background: rgba(240, 235, 225, 0.06);
+  border-color: var(--cream-dim);
 }
 
+/* Ghost: Subtle */
 .btn-ghost {
-  background: rgba(255, 255, 255, 0.04);
-  color: var(--text-primary);
-  border-color: var(--border-subtle);
+  background: transparent;
+  color: var(--text-secondary);
+  border-color: var(--border-faint);
 }
 
 .btn-ghost:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: var(--border-medium);
-  color: #FFFFFF;
+  background: rgba(240, 235, 225, 0.04);
+  color: var(--cream);
+  border-color: var(--border-subtle);
 }
 
 /* ============================================
-   TAGS & BADGES
+   TAGS
    ============================================ */
-.mono-tag {
+.tag {
   display: inline-flex;
   align-items: center;
   font-family: var(--font-mono);
-  font-size: 11px;
-  padding: 0.25rem 0.6rem;
-  border: 1px solid rgba(96, 165, 250, 0.18);
-  background: rgba(12, 24, 46, 0.6);
-  color: #93C5FD;
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+  padding: 0.25rem 0.65rem;
+  border: 1px solid var(--border-subtle);
+  background: rgba(240, 235, 225, 0.04);
+  color: var(--text-secondary);
   border-radius: var(--radius-sm);
-  letter-spacing: 0.02em;
-  transition: all var(--transition-fast);
+  transition: all var(--transition);
 }
 
-.mono-tag:hover {
-  border-color: var(--accent-blue-light);
-  color: #FFFFFF;
-  background: rgba(37, 99, 235, 0.2);
+.tag:hover {
+  border-color: rgba(232, 99, 10, 0.4);
+  color: var(--accent);
 }
 
-/* Status Pill */
+/* Status pill */
 .status-pill {
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
-  padding: 0.3rem 0.75rem;
+  padding: 0.3rem 0.8rem;
   border-radius: var(--radius-full);
-  background: rgba(16, 185, 129, 0.08);
-  border: 1px solid rgba(16, 185, 129, 0.25);
+  background: rgba(232, 99, 10, 0.1);
+  border: 1px solid rgba(232, 99, 10, 0.3);
   font-family: var(--font-mono);
-  font-size: 11.5px;
-  color: #34D399;
-  letter-spacing: 0.02em;
+  font-size: 10.5px;
+  color: var(--accent);
+  letter-spacing: 0.06em;
 }
 
 .status-dot {
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
-  background: #10B981;
+  background: var(--accent);
+  animation: pulse-dot 2s infinite;
 }
 
-/* ============================
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* ============================================
    NAVBAR
-   ============================ */
+   ============================================ */
 .navbar {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 100;
-  background: rgba(6, 12, 24, 0.85);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--border-subtle);
-  transition: all var(--transition-normal);
+  background: rgba(8, 8, 8, 0);
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+  border-bottom: 1px solid transparent;
+  transition: all 0.3s var(--ease-out);
 }
 
 .navbar.scrolled {
-  background: rgba(6, 12, 24, 0.96);
-  box-shadow: 0 4px 24px rgba(2, 6, 16, 0.6);
-  border-bottom-color: var(--border-medium);
+  background: rgba(8, 8, 8, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom-color: var(--border-faint);
+}
+
+/* ============================================
+   HERO SPECIFIC
+   ============================================ */
+@keyframes float-subtle {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+/* ============================================
+   RESPONSIVE — Mobile Nav
+   ============================================ */
+@media (max-width: 768px) {
+  .desktop-nav { display: none !important; }
+  .mobile-menu-btn { display: flex !important; }
+  .hero-grid { grid-template-columns: 1fr !important; }
+  .about-grid { grid-template-columns: 1fr !important; }
+  .contact-grid { grid-template-columns: 1fr !important; }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --section-padding: 5rem 0;
+    --container-padding: 1.25rem;
+  }
 }

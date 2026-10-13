@@ -2,41 +2,37 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import BlueprintSheet from "@/components/ui/BlueprintSheet";
-import { Layout, Terminal, Users } from "lucide-react";
+import SectionShell from "@/components/ui/BlueprintSheet";
 
 const skillGroups = [
   {
+    num: "01",
     title: "Front-End Development",
-    icon: Layout,
-    description: "Fondasi utama rekayasa antarmuka web modern, responsif, dan mudah diakses.",
     skills: [
-      { name: "HTML5 Semantic", detail: "Struktur semantik murni, SEO, dan aksesibilitas (WCAG)" },
-      { name: "CSS3 & Modern Layout", detail: "Flexbox, CSS Grid, custom properties, responsive design" },
-      { name: "JavaScript (ES6+)", detail: "Async/await, event loop, manipulasi DOM, Fetch API" },
-      { name: "React & Next.js", detail: "Komponen modular, hooks, routing modern, client/server rendering" },
+      { name: "HTML5 Semantic", detail: "Struktur semantik, SEO, aksesibilitas (WCAG)" },
+      { name: "CSS3 & Layout Modern", detail: "Flexbox, Grid, custom properties, responsive" },
+      { name: "JavaScript (ES6+)", detail: "Async/await, event loop, manipulasi DOM" },
+      { name: "React & Next.js", detail: "Hooks, routing modern, client/server rendering" },
     ],
   },
   {
+    num: "02",
     title: "Tooling & Workflow",
-    icon: Terminal,
-    description: "Alat kerja kolaboratif dan standar pengembangan perangkat lunak terdistribusi.",
     skills: [
-      { name: "Git & GitHub", detail: "Branching workflow, commit terstruktur, resolusi konflik" },
-      { name: "REST API Integration", detail: "Konsumsi endpoint backend, penanganan error, dan validasi data" },
-      { name: "Web Performance", detail: "Audit DevTools, optimasi aset gambar, responsive loading" },
-      { name: "Fundamental Back-End", detail: "Node.js dasar, protokol HTTP, dan alur CRUD" },
+      { name: "Git & GitHub", detail: "Branching workflow, commit terstruktur" },
+      { name: "REST API Integration", detail: "Konsumsi endpoint, penanganan error, validasi" },
+      { name: "Web Performance", detail: "Audit DevTools, optimasi aset, lazy loading" },
+      { name: "Node.js Dasar", detail: "Protokol HTTP, alur CRUD, backend fundamental" },
     ],
   },
   {
+    num: "03",
     title: "Kepemimpinan & Soft Skills",
-    icon: Users,
-    description: "Kapasitas interpersonal teruji dalam kepengurusan organisasi dan kompetisi.",
     skills: [
-      { name: "Kepemimpinan Lapangan", detail: "Memimpin 90+ anggota komunitas supporter dan tim OSIS" },
-      { name: "Public Speaking", detail: "Penyampaian presentasi dan koordinasi lintas pihak secara lugas" },
-      { name: "Manajemen Risiko", detail: "Penyusunan SOP dan kesigapan solusi saat kendala lapangan" },
-      { name: "Kolaborasi Tim", detail: "Bekerja selaras bersama tim back-end dan desainer" },
+      { name: "Kepemimpinan Lapangan", detail: "Memimpin 90+ anggota komunitas & OSIS" },
+      { name: "Public Speaking", detail: "Presentasi & koordinasi lintas pihak" },
+      { name: "Manajemen Risiko", detail: "SOP & kesigapan solusi lapangan" },
+      { name: "Kolaborasi Tim", detail: "Sinergi dengan back-end & desainer" },
     ],
   },
 ];
@@ -46,113 +42,108 @@ export default function Skills() {
   const inView = useInView(ref, { once: true, margin: "-60px" });
 
   return (
-    <BlueprintSheet id="skills" background="paper">
+    <SectionShell id="skills">
       <div ref={ref}>
-        {/* Section Header */}
-        <div className="section-header">
-          <h2 className="section-title">Keahlian & Kemampuan</h2>
-          <p className="section-subtitle">
-            Kombinasi keahlian teknis pemrograman antarmuka web dan kepemimpinan tim kolaboratif.
-          </p>
-        </div>
+        <div className="section-eyebrow">Keahlian &amp; Kemampuan</div>
 
-        {/* 3 Clean Category Columns */}
+        <h2 className="section-title" style={{ marginBottom: "3rem" }}>
+          Stack yang saya kuasai
+        </h2>
+
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
             gap: "1.5rem",
           }}
         >
-          {skillGroups.map((group, idx) => {
-            const Icon = group.icon;
-            return (
-              <motion.div
-                key={group.title}
-                initial={{ opacity: 0, y: 15 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.4, delay: idx * 0.1 }}
-                style={{
-                  background: "var(--bg-surface)",
-                  border: "1px solid var(--border-subtle)",
-                  borderRadius: "var(--radius)",
-                  padding: "1.75rem",
-                  display: "flex",
-                  flexDirection: "column",
-                }}
-                className="bp-card"
-              >
-                {/* Header */}
-                <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "0.5rem" }}>
-                  <div
-                    style={{
-                      width: "32px",
-                      height: "32px",
-                      borderRadius: "6px",
-                      background: "rgba(255, 255, 255, 0.04)",
-                      border: "1px solid var(--border-subtle)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      color: "var(--accent-blue)",
-                    }}
-                  >
-                    <Icon size={16} />
-                  </div>
-                  <h3
-                    style={{
-                      fontFamily: "var(--font-heading)",
-                      fontSize: "1.15rem",
-                      fontWeight: 700,
-                      color: "var(--text-primary)",
-                    }}
-                  >
-                    {group.title}
-                  </h3>
-                </div>
-
-                <p
+          {skillGroups.map((group, idx) => (
+            <motion.div
+              key={group.num}
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: idx * 0.12 }}
+              style={{
+                background: "var(--bg-surface)",
+                border: "1px solid var(--border-faint)",
+                borderRadius: "var(--radius)",
+                padding: "2rem",
+                display: "flex",
+                flexDirection: "column",
+                gap: "1.5rem",
+                transition: "border-color 0.2s ease",
+              }}
+              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.borderColor = "var(--border-subtle)"; }}
+              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.borderColor = "var(--border-faint)"; }}
+            >
+              {/* Header */}
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+                <h3
                   style={{
-                    fontSize: "0.85rem",
-                    color: "var(--text-muted)",
-                    lineHeight: 1.5,
-                    marginBottom: "1.5rem",
+                    fontFamily: "var(--font-body)",
+                    fontSize: "0.95rem",
+                    fontWeight: 600,
+                    color: "var(--cream)",
+                    lineHeight: 1.3,
                   }}
                 >
-                  {group.description}
-                </p>
+                  {group.title}
+                </h3>
+                <span
+                  style={{
+                    fontFamily: "var(--font-mono)",
+                    fontSize: "11px",
+                    color: "var(--accent)",
+                    letterSpacing: "0.06em",
+                    fontWeight: 500,
+                  }}
+                >
+                  {group.num}
+                </span>
+              </div>
 
-                {/* Skill items list */}
-                <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-                  {group.skills.map((s) => (
+              {/* Skills list */}
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                {group.skills.map((s, i) => (
+                  <div
+                    key={s.name}
+                    style={{
+                      padding: "0.85rem 0",
+                      borderBottom: i < group.skills.length - 1 ? "1px solid var(--border-faint)" : "none",
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      gap: "1rem",
+                    }}
+                  >
                     <div
-                      key={s.name}
                       style={{
-                        paddingBottom: "0.85rem",
-                        borderBottom: "1px solid rgba(255, 255, 255, 0.04)",
+                        fontSize: "0.875rem",
+                        fontWeight: 500,
+                        color: "var(--text-primary)",
                       }}
                     >
-                      <div
-                        style={{
-                          fontSize: "0.925rem",
-                          fontWeight: 600,
-                          color: "var(--text-primary)",
-                          marginBottom: "0.2rem",
-                        }}
-                      >
-                        {s.name}
-                      </div>
-                      <div style={{ fontSize: "0.8rem", color: "var(--text-secondary)", lineHeight: 1.4 }}>
-                        {s.detail}
-                      </div>
+                      {s.name}
                     </div>
-                  ))}
-                </div>
-              </motion.div>
-            );
-          })}
+                    <div
+                      style={{
+                        fontSize: "0.775rem",
+                        color: "var(--text-muted)",
+                        textAlign: "right",
+                        flexShrink: 0,
+                        maxWidth: "50%",
+                        lineHeight: 1.3,
+                      }}
+                    >
+                      {s.detail}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
-    </BlueprintSheet>
+    </SectionShell>
   );
 }

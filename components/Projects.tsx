@@ -2,9 +2,9 @@
 
 import { useRef, useState } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
-import { ExternalLink, X, ChevronLeft, ChevronRight } from "lucide-react";
+import { ExternalLink, X, ChevronLeft, ChevronRight, ArrowUpRight } from "lucide-react";
 import Image from "next/image";
-import BlueprintSheet from "@/components/ui/BlueprintSheet";
+import SectionShell from "@/components/ui/BlueprintSheet";
 
 const GithubIcon = ({ size = 15 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -15,16 +15,18 @@ const GithubIcon = ({ size = 15 }: { size?: number }) => (
 const projects = [
   {
     id: "situ",
-    title: "SITU (Sistem Informasi Tata Usaha)",
+    num: "01",
+    title: "SITU",
+    fullTitle: "Sistem Informasi Tata Usaha",
     role: "Front End Developer",
     period: "2025",
     type: "Web Administrasi Sekolah",
     description:
-      "Platform web administrasi internal sekolah untuk mempermudah digitalisasi berkas, arsip tata usaha, serta pengelolaan data siswa di SMK Telkom Malang.",
+      "Platform administrasi internal sekolah untuk digitalisasi berkas, arsip tata usaha, dan pengelolaan data siswa di SMK Telkom Malang.",
     contributions: [
-      "Mengembangkan antarmuka web responsif dan ramah pengguna bagi staf tata usaha",
-      "Merancang tabel data kesiswaan terstruktur untuk pencarian dan pembaruan berkas cepat",
-      "Mengintegrasikan formulir administrasi dengan endpoint REST API sistem sekolah",
+      "Antarmuka responsif untuk staf tata usaha",
+      "Tabel data siswa terstruktur dengan pencarian cepat",
+      "Integrasi formulir dengan REST API sistem sekolah",
     ],
     tech: ["HTML5", "CSS3", "JavaScript", "REST API", "Git"],
     github: "https://github.com/AlFathirAtta",
@@ -33,16 +35,18 @@ const projects = [
   },
   {
     id: "neonrent",
-    title: "NeonRent (Aplikasi Rental Mobil)",
+    num: "02",
+    title: "NeonRent",
+    fullTitle: "Aplikasi Rental Mobil",
     role: "Front End Developer",
     period: "2025",
-    type: "Platform Reservasi Mobil",
+    type: "Platform Reservasi",
     description:
-      "Aplikasi rental armada mobil modern dengan katalog armada terfilter dinamis, proses booking instan, dan alur pembayaran QRIS otomatis.",
+      "Aplikasi rental mobil modern dengan katalog terfilter dinamis, booking instan, dan pembayaran QRIS otomatis.",
     contributions: [
-      "Membangun antarmuka modern bertema dark mode dengan navigasi katalog yang intuitif",
-      "Mengimplementasikan filter dinamis multi-kategori (transmisi, kapasitas, rentang harga)",
-      "Sinkronisasi data stok unit kendaraan bersama tim Back End secara real-time",
+      "Dark mode UI dengan navigasi katalog intuitif",
+      "Filter multi-kategori: transmisi, kapasitas, harga",
+      "Sinkronisasi stok kendaraan real-time bersama tim",
     ],
     tech: ["HTML5", "CSS3", "JavaScript", "REST API", "Git"],
     github: "https://github.com/AlFathirAtta",
@@ -51,92 +55,81 @@ const projects = [
   },
 ];
 
-function SituCleanPreview() {
+function SituPreview() {
   return (
     <div
       style={{
         position: "relative",
         aspectRatio: "16/9",
-        background: "#0E1524",
-        borderBottom: "1px solid var(--border-subtle)",
+        background: "#0A0A0A",
         overflow: "hidden",
         display: "flex",
         flexDirection: "column",
         fontFamily: "var(--font-mono)",
       }}
     >
-      {/* Chrome header */}
+      {/* Browser chrome */}
       <div
         style={{
           display: "flex",
           alignItems: "center",
-          justifyContent: "space-between",
+          gap: "6px",
           padding: "8px 12px",
-          background: "rgba(255, 255, 255, 0.03)",
-          borderBottom: "1px solid var(--border-subtle)",
+          background: "rgba(255,255,255,0.03)",
+          borderBottom: "1px solid var(--border-faint)",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-          <span style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#EF4444", display: "inline-block" }} />
-          <span style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#F59E0B", display: "inline-block" }} />
-          <span style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#10B981", display: "inline-block" }} />
-          <span style={{ fontSize: "10px", color: "var(--text-muted)", marginLeft: "8px" }}>
-            situ.internal.smktelkom-mlg.sch.id
-          </span>
-        </div>
-        <span style={{ fontSize: "9px", color: "var(--accent-blue)" }}>SISTEM TATA USAHA</span>
+        <span style={{ width: "7px", height: "7px", borderRadius: "50%", background: "#EF4444", display: "inline-block" }} />
+        <span style={{ width: "7px", height: "7px", borderRadius: "50%", background: "#F59E0B", display: "inline-block" }} />
+        <span style={{ width: "7px", height: "7px", borderRadius: "50%", background: "#10B981", display: "inline-block" }} />
+        <span style={{ fontSize: "9px", color: "var(--text-muted)", marginLeft: "8px" }}>
+          situ.internal.smktelkom-mlg.sch.id
+        </span>
       </div>
 
-      {/* Mock Table Layout */}
+      {/* Mock content */}
       <div style={{ flex: 1, padding: "12px", display: "flex", flexDirection: "column", gap: "8px" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <span style={{ fontSize: "11px", fontWeight: 600, color: "var(--text-primary)" }}>
-            DATABASE BERKAS SISWA · AKTIF
-          </span>
-          <span style={{ fontSize: "9px", color: "var(--accent-emerald)" }}>● 1,420 SISWA TERDATA</span>
+          <span style={{ fontSize: "10px", fontWeight: 600, color: "var(--cream)" }}>DATABASE BERKAS SISWA</span>
+          <span style={{ fontSize: "9px", color: "#10B981" }}>● 1,420 SISWA</span>
         </div>
 
-        <div style={{ border: "1px solid var(--border-subtle)", borderRadius: "4px", overflow: "hidden" }}>
+        <div style={{ border: "1px solid var(--border-faint)", borderRadius: "3px", overflow: "hidden" }}>
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "30px 2fr 1fr 1fr",
-              fontSize: "8.5px",
+              gridTemplateColumns: "28px 2fr 1fr 1fr",
+              fontSize: "8px",
               color: "var(--text-muted)",
-              background: "rgba(255, 255, 255, 0.04)",
+              background: "rgba(255,255,255,0.03)",
               padding: "4px 8px",
-              borderBottom: "1px solid var(--border-subtle)",
+              borderBottom: "1px solid var(--border-faint)",
             }}
           >
-            <span>NO</span>
-            <span>NAMA & NIS</span>
-            <span>KELAS</span>
-            <span>STATUS</span>
+            <span>NO</span><span>NAMA & NIS</span><span>KELAS</span><span>STATUS</span>
           </div>
 
           {[
-            { no: "01", name: "Al Fathir Attaullah (541/23)", class: "XII RPL 1", status: "VERIFIED" },
-            { no: "02", name: "Aditya Pratama (542/23)", class: "XII RPL 2", status: "VERIFIED" },
-            { no: "03", name: "Devina Kusuma (543/23)", class: "XI RPL 1", status: "PROSES" },
-          ].map((row, idx) => (
+            { no: "01", name: "Al Fathir Attaullah (541/23)", class: "XII RPL 1", status: "VERIFIED", ok: true },
+            { no: "02", name: "Aditya Pratama (542/23)", class: "XII RPL 2", status: "VERIFIED", ok: true },
+            { no: "03", name: "Devina Kusuma (543/23)", class: "XI RPL 1", status: "PROSES", ok: false },
+          ].map((row, i) => (
             <div
-              key={idx}
+              key={i}
               style={{
                 display: "grid",
-                gridTemplateColumns: "30px 2fr 1fr 1fr",
-                fontSize: "8.5px",
+                gridTemplateColumns: "28px 2fr 1fr 1fr",
+                fontSize: "8px",
                 color: "var(--text-secondary)",
                 padding: "5px 8px",
-                borderBottom: idx < 2 ? "1px solid rgba(255, 255, 255, 0.03)" : "none",
+                borderBottom: i < 2 ? "1px solid rgba(255,255,255,0.02)" : "none",
                 alignItems: "center",
               }}
             >
               <span style={{ color: "var(--text-muted)" }}>{row.no}</span>
-              <span style={{ color: "#FFFFFF", fontWeight: 500 }}>{row.name}</span>
+              <span style={{ color: "var(--cream)", fontWeight: 500 }}>{row.name}</span>
               <span>{row.class}</span>
-              <span style={{ color: row.status === "VERIFIED" ? "#10B981" : "#F59E0B", fontWeight: 600 }}>
-                {row.status}
-              </span>
+              <span style={{ color: row.ok ? "#10B981" : "#F59E0B", fontWeight: 600 }}>{row.status}</span>
             </div>
           ))}
         </div>
@@ -159,79 +152,44 @@ function ImageCarousel({ images, title }: { images: string[]; title: string }) {
             overflow: "hidden",
             position: "relative",
             aspectRatio: "16/9",
-            cursor: "pointer",
-            background: "#080C14",
+            cursor: "zoom-in",
+            background: "#080808",
           }}
           onClick={() => setLightbox(true)}
           role="button"
           tabIndex={0}
           aria-label={`Lihat screenshot ${title}`}
         >
-          <Image
-            src={images[current]}
-            alt={`${title} screenshot`}
-            fill
-            style={{ objectFit: "cover" }}
-          />
-
+          <Image src={images[current]} alt={`${title} screenshot`} fill style={{ objectFit: "cover" }} />
           <div
             style={{
               position: "absolute",
               bottom: "8px",
               right: "8px",
-              background: "rgba(0, 0, 0, 0.75)",
-              border: "1px solid var(--border-subtle)",
-              borderRadius: "4px",
+              background: "rgba(0,0,0,0.8)",
+              borderRadius: "3px",
               padding: "0.2rem 0.5rem",
               fontSize: "10px",
               fontFamily: "var(--font-mono)",
-              color: "#FFFFFF",
+              color: "var(--cream)",
             }}
           >
-            {current + 1} / {images.length}
+            {current + 1}/{images.length}
           </div>
         </div>
 
         {images.length > 1 && (
           <>
             <button
-              onClick={(e) => {
-                e.stopPropagation();
-                setCurrent((c) => (c - 1 + images.length) % images.length);
-              }}
-              style={{
-                position: "absolute",
-                left: "8px",
-                top: "50%",
-                transform: "translateY(-50%)",
-                background: "rgba(0, 0, 0, 0.65)",
-                border: "1px solid var(--border-subtle)",
-                borderRadius: "4px",
-                padding: "0.35rem",
-                color: "#FFFFFF",
-                cursor: "pointer",
-              }}
+              onClick={(e) => { e.stopPropagation(); setCurrent((c) => (c - 1 + images.length) % images.length); }}
+              style={{ position: "absolute", left: "8px", top: "50%", transform: "translateY(-50%)", background: "rgba(0,0,0,0.7)", border: "none", borderRadius: "3px", padding: "0.35rem", color: "#fff", cursor: "pointer" }}
               aria-label="Sebelumnya"
             >
               <ChevronLeft size={14} />
             </button>
             <button
-              onClick={(e) => {
-                e.stopPropagation();
-                setCurrent((c) => (c + 1) % images.length);
-              }}
-              style={{
-                position: "absolute",
-                right: "8px",
-                top: "50%",
-                transform: "translateY(-50%)",
-                background: "rgba(0, 0, 0, 0.65)",
-                border: "1px solid var(--border-subtle)",
-                borderRadius: "4px",
-                padding: "0.35rem",
-                color: "#FFFFFF",
-                cursor: "pointer",
-              }}
+              onClick={(e) => { e.stopPropagation(); setCurrent((c) => (c + 1) % images.length); }}
+              style={{ position: "absolute", right: "8px", top: "50%", transform: "translateY(-50%)", background: "rgba(0,0,0,0.7)", border: "none", borderRadius: "3px", padding: "0.35rem", color: "#fff", cursor: "pointer" }}
               aria-label="Berikutnya"
             >
               <ChevronRight size={14} />
@@ -250,7 +208,7 @@ function ImageCarousel({ images, title }: { images: string[]; title: string }) {
             style={{
               position: "fixed",
               inset: 0,
-              background: "rgba(0, 0, 0, 0.9)",
+              background: "rgba(0,0,0,0.95)",
               zIndex: 1000,
               display: "flex",
               alignItems: "center",
@@ -260,17 +218,7 @@ function ImageCarousel({ images, title }: { images: string[]; title: string }) {
           >
             <button
               onClick={() => setLightbox(false)}
-              style={{
-                position: "absolute",
-                top: "1.5rem",
-                right: "1.5rem",
-                background: "rgba(255, 255, 255, 0.1)",
-                border: "none",
-                borderRadius: "4px",
-                padding: "0.4rem",
-                color: "#FFFFFF",
-                cursor: "pointer",
-              }}
+              style={{ position: "absolute", top: "1.5rem", right: "1.5rem", background: "rgba(255,255,255,0.08)", border: "none", borderRadius: "4px", padding: "0.4rem", color: "#fff", cursor: "pointer" }}
             >
               <X size={20} />
             </button>
@@ -292,144 +240,124 @@ export default function Projects() {
   const inView = useInView(ref, { once: true, margin: "-60px" });
 
   return (
-    <BlueprintSheet id="projects" background="paper-alt">
+    <SectionShell id="projects" alt>
       <div ref={ref}>
-        {/* Section header */}
-        <div className="section-header">
-          <h2 className="section-title">Karya Proyek</h2>
-          <p className="section-subtitle">
-            Implementasi antarmuka web nyata dengan fokus pada kejelasan alur pengguna,
-            kinerja rendering, dan integrasi data backend.
-          </p>
-        </div>
+        <div className="section-eyebrow">Karya Proyek</div>
+        <h2 className="section-title" style={{ marginBottom: "3rem" }}>
+          Yang sudah saya bangun
+        </h2>
 
-        {/* Projects Grid */}
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(420px, 1fr))",
-            gap: "2rem",
+            gridTemplateColumns: "repeat(auto-fit, minmax(400px, 1fr))",
+            gap: "1.5rem",
           }}
         >
           {projects.map((project, idx) => (
             <motion.div
               key={project.id}
-              initial={{ opacity: 0, y: 15 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.4, delay: idx * 0.1 }}
+              transition={{ duration: 0.5, delay: idx * 0.12 }}
               style={{
-                background: "var(--bg-surface)",
-                border: "1px solid var(--border-subtle)",
+                background: "var(--bg-main)",
+                border: "1px solid var(--border-faint)",
                 borderRadius: "var(--radius)",
                 overflow: "hidden",
                 display: "flex",
                 flexDirection: "column",
-                boxShadow: "var(--shadow-sm)",
+                transition: "border-color 0.2s ease",
               }}
-              className="bp-card"
+              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.borderColor = "var(--border-subtle)"; }}
+              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.borderColor = "var(--border-faint)"; }}
             >
               {/* Preview */}
-              {project.isDashboard ? (
-                <SituCleanPreview />
-              ) : (
-                <div style={{ borderBottom: "1px solid var(--border-subtle)" }}>
-                  <ImageCarousel images={project.images} title={project.title} />
-                </div>
+              {project.isDashboard ? <SituPreview /> : (
+                <ImageCarousel images={project.images} title={project.title} />
               )}
 
-              {/* Card Body */}
-              <div style={{ padding: "1.5rem", display: "flex", flexDirection: "column", flex: 1 }}>
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "0.5rem" }}>
+              {/* Body */}
+              <div style={{ padding: "1.5rem", flex: 1, display: "flex", flexDirection: "column", gap: "1rem" }}>
+                {/* Header */}
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
                   <div>
+                    <div
+                      style={{
+                        fontFamily: "var(--font-mono)",
+                        fontSize: "10.5px",
+                        color: "var(--accent)",
+                        letterSpacing: "0.08em",
+                        marginBottom: "0.3rem",
+                      }}
+                    >
+                      {project.num} — {project.type}
+                    </div>
                     <h3
                       style={{
-                        fontFamily: "var(--font-heading)",
-                        fontSize: "1.2rem",
+                        fontFamily: "var(--font-display)",
+                        fontStyle: "italic",
                         fontWeight: 700,
-                        color: "var(--text-primary)",
-                        marginBottom: "0.2rem",
+                        fontSize: "1.35rem",
+                        color: "var(--cream)",
+                        lineHeight: 1.2,
                       }}
                     >
                       {project.title}
                     </h3>
-                    <div style={{ fontSize: "12px", color: "var(--accent-blue)" }}>
-                      {project.role} · {project.period}
+                    <div style={{ fontSize: "12px", color: "var(--text-muted)", marginTop: "0.15rem" }}>
+                      {project.fullTitle} · {project.period}
                     </div>
                   </div>
-                  <span
-                    style={{
-                      fontSize: "10.5px",
-                      fontFamily: "var(--font-mono)",
-                      color: "var(--text-muted)",
-                      background: "rgba(255, 255, 255, 0.04)",
-                      padding: "0.2rem 0.5rem",
-                      borderRadius: "4px",
-                    }}
-                  >
-                    {project.type}
-                  </span>
                 </div>
 
+                {/* Description */}
                 <p
                   style={{
                     color: "var(--text-secondary)",
-                    fontSize: "0.9rem",
-                    lineHeight: 1.6,
-                    margin: "0.75rem 0 1rem 0",
+                    fontSize: "0.875rem",
+                    lineHeight: 1.7,
+                    fontWeight: 300,
                   }}
                 >
                   {project.description}
                 </p>
 
                 {/* Contributions */}
-                <div style={{ marginBottom: "1.25rem" }}>
-                  <div
-                    style={{
-                      fontFamily: "var(--font-mono)",
-                      fontSize: "10.5px",
-                      color: "var(--text-muted)",
-                      marginBottom: "0.45rem",
-                    }}
-                  >
-                    KONTRIBUSI UTAMA:
-                  </div>
-                  <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "0.35rem" }}>
-                    {project.contributions.map((c) => (
-                      <li
-                        key={c}
-                        style={{
-                          display: "flex",
-                          gap: "0.5rem",
-                          fontSize: "0.825rem",
-                          color: "var(--text-primary)",
-                          lineHeight: 1.45,
-                        }}
-                      >
-                        <span style={{ color: "var(--accent-blue)" }}>↳</span>
-                        <span>{c}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "0.3rem" }}>
+                  {project.contributions.map((c) => (
+                    <li
+                      key={c}
+                      style={{
+                        display: "flex",
+                        gap: "0.5rem",
+                        fontSize: "0.825rem",
+                        color: "var(--text-secondary)",
+                        lineHeight: 1.5,
+                      }}
+                    >
+                      <span style={{ color: "var(--accent)", marginTop: "1px", flexShrink: 0 }}>—</span>
+                      <span>{c}</span>
+                    </li>
+                  ))}
+                </ul>
 
-                {/* Tech stack & GitHub CTA */}
+                {/* Footer */}
                 <div
                   style={{
                     marginTop: "auto",
                     paddingTop: "1rem",
-                    borderTop: "1px solid var(--border-subtle)",
+                    borderTop: "1px solid var(--border-faint)",
                     display: "flex",
                     justifyContent: "space-between",
                     alignItems: "center",
-                    flexWrap: "wrap",
                     gap: "0.75rem",
+                    flexWrap: "wrap",
                   }}
                 >
                   <div style={{ display: "flex", flexWrap: "wrap", gap: "0.35rem" }}>
                     {project.tech.map((t) => (
-                      <span key={t} className="mono-tag" style={{ fontSize: "10px", padding: "0.15rem 0.45rem" }}>
-                        {t}
-                      </span>
+                      <span key={t} className="tag" style={{ fontSize: "10px" }}>{t}</span>
                     ))}
                   </div>
 
@@ -438,10 +366,11 @@ export default function Projects() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="btn btn-ghost"
-                    style={{ fontSize: "0.8rem", padding: "0.4rem 0.75rem" }}
+                    style={{ fontSize: "0.8rem", padding: "0.35rem 0.75rem", gap: "0.4rem" }}
                   >
-                    <GithubIcon size={14} />
-                    <span>Lihat di GitHub</span>
+                    <GithubIcon size={13} />
+                    GitHub
+                    <ArrowUpRight size={12} />
                   </a>
                 </div>
               </div>
@@ -449,6 +378,6 @@ export default function Projects() {
           ))}
         </div>
       </div>
-    </BlueprintSheet>
+    </SectionShell>
   );
 }
